@@ -1,0 +1,21 @@
+module AlchemystAISDK
+  module Models
+    module V1
+      module Context
+        type trace_list_params =
+          {  } & AlchemystAISDK::Internal::Type::request_parameters
+
+        class TraceListParams < AlchemystAISDK::Internal::Type::BaseModel
+          extend AlchemystAISDK::Internal::Type::RequestParameters::Converter
+          include AlchemystAISDK::Internal::Type::RequestParameters
+
+          def initialize: (
+            ?request_options: AlchemystAISDK::request_opts
+          ) -> void
+
+          def to_hash: -> { request_options: AlchemystAISDK::RequestOptions }
+        end
+      end
+    end
+  end
+end

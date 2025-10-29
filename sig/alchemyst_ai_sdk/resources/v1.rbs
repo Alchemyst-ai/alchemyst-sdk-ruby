@@ -1,0 +1,11 @@
+module AlchemystAISDK
+  module Resources
+    class V1
+      attr_reader context: AlchemystAISDK::Resources::V1::Context
+
+      attr_reader org: AlchemystAISDK::Resources::V1::Org
+
+      def initialize: (client: AlchemystAISDK::Client) -> void
+    end
+  end
+end

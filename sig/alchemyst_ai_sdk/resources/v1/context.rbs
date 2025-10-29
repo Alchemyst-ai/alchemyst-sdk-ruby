@@ -1,0 +1,43 @@
+module AlchemystAISDK
+  module Resources
+    class V1
+      class Context
+        attr_reader traces: AlchemystAISDK::Resources::V1::Context::Traces
+
+        attr_reader view: AlchemystAISDK::Resources::V1::Context::View
+
+        attr_reader memory: AlchemystAISDK::Resources::V1::Context::Memory
+
+        def delete: (
+          ?by_doc: bool?,
+          ?by_id: bool?,
+          ?organization_id: String?,
+          ?source: String,
+          ?user_id: String?,
+          ?request_options: AlchemystAISDK::request_opts
+        ) -> top
+
+        def add: (
+          ?context_type: AlchemystAISDK::Models::V1::ContextAddParams::context_type,
+          ?documents: ::Array[AlchemystAISDK::V1::ContextAddParams::Document],
+          ?metadata: AlchemystAISDK::V1::ContextAddParams::Metadata,
+          ?scope: AlchemystAISDK::Models::V1::ContextAddParams::scope,
+          ?source: String,
+          ?request_options: AlchemystAISDK::request_opts
+        ) -> top
+
+        def search: (
+          minimum_similarity_threshold: Float,
+          query: String,
+          similarity_threshold: Float,
+          ?metadata: top,
+          ?scope: AlchemystAISDK::Models::V1::ContextSearchParams::scope,
+          ?user_id: String,
+          ?request_options: AlchemystAISDK::request_opts
+        ) -> AlchemystAISDK::Models::V1::ContextSearchResponse
+
+        def initialize: (client: AlchemystAISDK::Client) -> void
+      end
+    end
+  end
+end

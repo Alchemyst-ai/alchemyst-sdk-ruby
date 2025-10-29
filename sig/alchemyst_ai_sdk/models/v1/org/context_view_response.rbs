@@ -1,0 +1,19 @@
+module AlchemystAISDK
+  module Models
+    module V1
+      module Org
+        type context_view_response = { contexts: top }
+
+        class ContextViewResponse < AlchemystAISDK::Internal::Type::BaseModel
+          attr_reader contexts: top?
+
+          def contexts=: (top) -> top
+
+          def initialize: (?contexts: top) -> void
+
+          def to_hash: -> { contexts: top }
+        end
+      end
+    end
+  end
+end
