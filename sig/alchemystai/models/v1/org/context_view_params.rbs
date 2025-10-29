@@ -1,0 +1,28 @@
+module Alchemystai
+  module Models
+    module V1
+      module Org
+        type context_view_params =
+          { user_ids: ::Array[String] }
+          & Alchemystai::Internal::Type::request_parameters
+
+        class ContextViewParams < Alchemystai::Internal::Type::BaseModel
+          extend Alchemystai::Internal::Type::RequestParameters::Converter
+          include Alchemystai::Internal::Type::RequestParameters
+
+          attr_accessor user_ids: ::Array[String]
+
+          def initialize: (
+            user_ids: ::Array[String],
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            user_ids: ::Array[String],
+            request_options: Alchemystai::RequestOptions
+          }
+        end
+      end
+    end
+  end
+end

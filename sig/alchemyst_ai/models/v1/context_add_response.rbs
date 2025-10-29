@@ -1,7 +1,0 @@
-module AlchemystAI
-  module Models
-    module V1
-      ContextAddResponse: AlchemystAI::Internal::Type::Converter
-    end
-  end
-end

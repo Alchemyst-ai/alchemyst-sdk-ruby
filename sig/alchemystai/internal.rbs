@@ -1,0 +1,9 @@
+module Alchemystai
+  module Internal
+    extend Alchemystai::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | Alchemystai::FilePart
+
+    OMIT: Object
+  end
+end

@@ -1,0 +1,3 @@
+module Alchemystai
+  VERSION: String
+end

@@ -1,0 +1,7 @@
+module Alchemystai
+  module Models
+    module V1
+      ContextDeleteResponse: Alchemystai::Internal::Type::Converter
+    end
+  end
+end

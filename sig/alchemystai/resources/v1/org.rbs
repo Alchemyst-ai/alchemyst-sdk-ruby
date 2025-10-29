@@ -1,0 +1,11 @@
+module Alchemystai
+  module Resources
+    class V1
+      class Org
+        attr_reader context: Alchemystai::Resources::V1::Org::Context
+
+        def initialize: (client: Alchemystai::Client) -> void
+      end
+    end
+  end
+end
