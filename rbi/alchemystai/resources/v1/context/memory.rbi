@@ -5,6 +5,26 @@ module Alchemystai
     class V1
       class Context
         class Memory
+          # This endpoint updates memory context data.
+          sig do
+            params(
+              contents:
+                T::Array[
+                  Alchemystai::V1::Context::MemoryUpdateParams::Content::OrHash
+                ],
+              memory_id: String,
+              request_options: Alchemystai::RequestOptions::OrHash
+            ).void
+          end
+          def update(
+            # Array of updated content objects
+            contents: nil,
+            # The ID of the memory to update
+            memory_id: nil,
+            request_options: {}
+          )
+          end
+
           # Deletes memory context data based on provided parameters
           sig do
             params(

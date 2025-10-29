@@ -3,6 +3,12 @@ module Alchemystai
     class V1
       class Context
         class Memory
+          def update: (
+            ?contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            ?memory_id: String,
+            ?request_options: Alchemystai::request_opts
+          ) -> nil
+
           def delete: (
             ?memory_id: String,
             ?organization_id: String?,

@@ -5,6 +5,30 @@ module Alchemystai
     class V1
       class Context
         class Memory
+          # This endpoint updates memory context data.
+          #
+          # @overload update(contents: nil, memory_id: nil, request_options: {})
+          #
+          # @param contents [Array<Alchemystai::Models::V1::Context::MemoryUpdateParams::Content>] Array of updated content objects
+          #
+          # @param memory_id [String] The ID of the memory to update
+          #
+          # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [nil]
+          #
+          # @see Alchemystai::Models::V1::Context::MemoryUpdateParams
+          def update(params = {})
+            parsed, options = Alchemystai::V1::Context::MemoryUpdateParams.dump_request(params)
+            @client.request(
+              method: :post,
+              path: "api/v1/context/memory/update",
+              body: parsed,
+              model: NilClass,
+              options: options
+            )
+          end
+
           # Deletes memory context data based on provided parameters
           #
           # @overload delete(memory_id: nil, organization_id: nil, user_id: nil, request_options: {})

@@ -1,0 +1,53 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type memory_update_params =
+          {
+            contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            memory_id: String
+          }
+          & Alchemystai::Internal::Type::request_parameters
+
+        class MemoryUpdateParams < Alchemystai::Internal::Type::BaseModel
+          extend Alchemystai::Internal::Type::RequestParameters::Converter
+          include Alchemystai::Internal::Type::RequestParameters
+
+          attr_reader contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]?
+
+          def contents=: (
+            ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
+          ) -> ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
+
+          attr_reader memory_id: String?
+
+          def memory_id=: (String) -> String
+
+          def initialize: (
+            ?contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            ?memory_id: String,
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            memory_id: String,
+            request_options: Alchemystai::RequestOptions
+          }
+
+          type content = { content: String }
+
+          class Content < Alchemystai::Internal::Type::BaseModel
+            attr_reader content: String?
+
+            def content=: (String) -> String
+
+            def initialize: (?content: String) -> void
+
+            def to_hash: -> { content: String }
+          end
+        end
+      end
+    end
+  end
+end
