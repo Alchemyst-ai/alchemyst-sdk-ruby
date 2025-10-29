@@ -1,0 +1,50 @@
+module AlchemystAISDK
+  module Models
+    module V1
+      type context_delete_params =
+        {
+          by_doc: bool?,
+          by_id: bool?,
+          organization_id: String?,
+          source: String,
+          user_id: String?
+        }
+        & AlchemystAISDK::Internal::Type::request_parameters
+
+      class ContextDeleteParams < AlchemystAISDK::Internal::Type::BaseModel
+        extend AlchemystAISDK::Internal::Type::RequestParameters::Converter
+        include AlchemystAISDK::Internal::Type::RequestParameters
+
+        attr_accessor by_doc: bool?
+
+        attr_accessor by_id: bool?
+
+        attr_accessor organization_id: String?
+
+        attr_reader source: String?
+
+        def source=: (String) -> String
+
+        attr_accessor user_id: String?
+
+        def initialize: (
+          ?by_doc: bool?,
+          ?by_id: bool?,
+          ?organization_id: String?,
+          ?source: String,
+          ?user_id: String?,
+          ?request_options: AlchemystAISDK::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          by_doc: bool?,
+          by_id: bool?,
+          organization_id: String?,
+          source: String,
+          user_id: String?,
+          request_options: AlchemystAISDK::RequestOptions
+        }
+      end
+    end
+  end
+end

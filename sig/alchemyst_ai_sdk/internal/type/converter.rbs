@@ -1,0 +1,79 @@
+module AlchemystAISDK
+  module Internal
+    module Type
+      module Converter
+        extend AlchemystAISDK::Internal::Util::SorbetRuntimeSupport
+
+        type input = AlchemystAISDK::Internal::Type::Converter | Class
+
+        type coerce_state =
+          {
+            translate_names: bool,
+            strictness: bool,
+            exactness: { yes: Integer, no: Integer, maybe: Integer },
+            error: Class,
+            branched: Integer
+          }
+
+        type dump_state = { can_retry: bool }
+
+        def coerce: (
+          top value,
+          state: AlchemystAISDK::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def dump: (
+          top value,
+          state: AlchemystAISDK::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def inspect: (?depth: Integer) -> String
+
+        def self.type_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> AlchemystAISDK::Internal::Type::Converter::input?,
+            union: ^-> AlchemystAISDK::Internal::Type::Converter::input?
+          }
+          | ^-> AlchemystAISDK::Internal::Type::Converter::input
+          | AlchemystAISDK::Internal::Type::Converter::input spec
+        ) -> (^-> top)
+
+        def self.meta_info: (
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> AlchemystAISDK::Internal::Type::Converter::input?,
+            union: ^-> AlchemystAISDK::Internal::Type::Converter::input?
+          }
+          | ^-> AlchemystAISDK::Internal::Type::Converter::input
+          | AlchemystAISDK::Internal::Type::Converter::input type_info,
+          {
+            const: (nil | bool | Integer | Float | Symbol)?,
+            enum: ^-> AlchemystAISDK::Internal::Type::Converter::input?,
+            union: ^-> AlchemystAISDK::Internal::Type::Converter::input?
+          }
+          | ^-> AlchemystAISDK::Internal::Type::Converter::input
+          | AlchemystAISDK::Internal::Type::Converter::input spec
+        ) -> ::Hash[Symbol, top]
+
+        def self.new_coerce_state: (
+          ?translate_names: bool
+        ) -> AlchemystAISDK::Internal::Type::Converter::coerce_state
+
+        def self.coerce: (
+          AlchemystAISDK::Internal::Type::Converter::input target,
+          top value,
+          ?state: AlchemystAISDK::Internal::Type::Converter::coerce_state
+        ) -> top
+
+        def self.dump: (
+          AlchemystAISDK::Internal::Type::Converter::input target,
+          top value,
+          ?state: AlchemystAISDK::Internal::Type::Converter::dump_state
+        ) -> top
+
+        def self.inspect: (top target, depth: Integer) -> String
+      end
+    end
+  end
+end

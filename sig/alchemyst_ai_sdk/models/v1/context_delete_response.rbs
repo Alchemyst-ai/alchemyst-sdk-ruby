@@ -1,0 +1,7 @@
+module AlchemystAISDK
+  module Models
+    module V1
+      ContextDeleteResponse: AlchemystAISDK::Internal::Type::Converter
+    end
+  end
+end

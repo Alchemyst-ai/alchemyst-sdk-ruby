@@ -1,0 +1,16 @@
+module AlchemystAISDK
+  module Resources
+    class V1
+      class Org
+        class Context
+          def view: (
+            user_ids: ::Array[String],
+            ?request_options: AlchemystAISDK::request_opts
+          ) -> AlchemystAISDK::Models::V1::Org::ContextViewResponse
+
+          def initialize: (client: AlchemystAISDK::Client) -> void
+        end
+      end
+    end
+  end
+end
