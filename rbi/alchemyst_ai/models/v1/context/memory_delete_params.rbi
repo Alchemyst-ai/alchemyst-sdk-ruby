@@ -1,0 +1,69 @@
+# typed: strong
+
+module AlchemystAI
+  module Models
+    module V1
+      module Context
+        class MemoryDeleteParams < AlchemystAI::Internal::Type::BaseModel
+          extend AlchemystAI::Internal::Type::RequestParameters::Converter
+          include AlchemystAI::Internal::Type::RequestParameters
+
+          OrHash =
+            T.type_alias do
+              T.any(
+                AlchemystAI::V1::Context::MemoryDeleteParams,
+                AlchemystAI::Internal::AnyHash
+              )
+            end
+
+          # The ID of the memory to delete
+          sig { returns(T.nilable(String)) }
+          attr_reader :memory_id
+
+          sig { params(memory_id: String).void }
+          attr_writer :memory_id
+
+          # Optional organization ID
+          sig { returns(T.nilable(String)) }
+          attr_accessor :organization_id
+
+          # Optional user ID
+          sig { returns(T.nilable(String)) }
+          attr_accessor :user_id
+
+          sig do
+            params(
+              memory_id: String,
+              organization_id: T.nilable(String),
+              user_id: T.nilable(String),
+              request_options: AlchemystAI::RequestOptions::OrHash
+            ).returns(T.attached_class)
+          end
+          def self.new(
+            # The ID of the memory to delete
+            memory_id: nil,
+            # Optional organization ID
+            organization_id: nil,
+            # Optional user ID
+            user_id: nil,
+            request_options: {}
+          )
+          end
+
+          sig do
+            override.returns(
+              {
+                memory_id: String,
+                organization_id: T.nilable(String),
+                user_id: T.nilable(String),
+                request_options: AlchemystAI::RequestOptions
+              }
+            )
+          end
+          def to_hash
+          end
+        end
+      end
+    end
+  end
+end

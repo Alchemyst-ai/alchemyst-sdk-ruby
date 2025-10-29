@@ -162,7 +162,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- alchemyst_ai_sdk.gemspec])
+  sh(*%w[gem build -- alchemyst_ai.gemspec])
   rm_rf(ignore_file)
 end
 

@@ -1,0 +1,9 @@
+module AlchemystAI
+  module Models
+    module V1
+      module Context
+        ViewDocsResponse: AlchemystAI::Internal::Type::Converter
+      end
+    end
+  end
+end

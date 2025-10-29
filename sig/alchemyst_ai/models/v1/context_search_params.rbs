@@ -1,0 +1,72 @@
+module AlchemystAI
+  module Models
+    module V1
+      type context_search_params =
+        {
+          minimum_similarity_threshold: Float,
+          query: String,
+          similarity_threshold: Float,
+          metadata: top,
+          scope: AlchemystAI::Models::V1::ContextSearchParams::scope,
+          user_id: String
+        }
+        & AlchemystAI::Internal::Type::request_parameters
+
+      class ContextSearchParams < AlchemystAI::Internal::Type::BaseModel
+        extend AlchemystAI::Internal::Type::RequestParameters::Converter
+        include AlchemystAI::Internal::Type::RequestParameters
+
+        attr_accessor minimum_similarity_threshold: Float
+
+        attr_accessor query: String
+
+        attr_accessor similarity_threshold: Float
+
+        attr_reader metadata: top?
+
+        def metadata=: (top) -> top
+
+        attr_reader scope: AlchemystAI::Models::V1::ContextSearchParams::scope?
+
+        def scope=: (
+          AlchemystAI::Models::V1::ContextSearchParams::scope
+        ) -> AlchemystAI::Models::V1::ContextSearchParams::scope
+
+        attr_reader user_id: String?
+
+        def user_id=: (String) -> String
+
+        def initialize: (
+          minimum_similarity_threshold: Float,
+          query: String,
+          similarity_threshold: Float,
+          ?metadata: top,
+          ?scope: AlchemystAI::Models::V1::ContextSearchParams::scope,
+          ?user_id: String,
+          ?request_options: AlchemystAI::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          minimum_similarity_threshold: Float,
+          query: String,
+          similarity_threshold: Float,
+          metadata: top,
+          scope: AlchemystAI::Models::V1::ContextSearchParams::scope,
+          user_id: String,
+          request_options: AlchemystAI::RequestOptions
+        }
+
+        type scope = :internal | :external
+
+        module Scope
+          extend AlchemystAI::Internal::Type::Enum
+
+          INTERNAL: :internal
+          EXTERNAL: :external
+
+          def self?.values: -> ::Array[AlchemystAI::Models::V1::ContextSearchParams::scope]
+        end
+      end
+    end
+  end
+end
