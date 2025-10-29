@@ -1,3 +1,0 @@
-module AlchemystAISDK
-  module V1 = AlchemystAISDK::Models::V1
-end

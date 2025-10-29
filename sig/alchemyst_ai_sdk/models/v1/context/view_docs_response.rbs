@@ -1,9 +1,0 @@
-module AlchemystAISDK
-  module Models
-    module V1
-      module Context
-        ViewDocsResponse: AlchemystAISDK::Internal::Type::Converter
-      end
-    end
-  end
-end

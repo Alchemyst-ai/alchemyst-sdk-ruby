@@ -1,7 +1,0 @@
-module AlchemystAISDK
-  module Models
-    module V1
-      ContextAddResponse: AlchemystAISDK::Internal::Type::Converter
-    end
-  end
-end

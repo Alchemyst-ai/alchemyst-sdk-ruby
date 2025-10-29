@@ -1,0 +1,53 @@
+module AlchemystAI
+  module Models
+    module V1
+      module Context
+        type memory_add_params =
+          {
+            contents: ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content],
+            memory_id: String
+          }
+          & AlchemystAI::Internal::Type::request_parameters
+
+        class MemoryAddParams < AlchemystAI::Internal::Type::BaseModel
+          extend AlchemystAI::Internal::Type::RequestParameters::Converter
+          include AlchemystAI::Internal::Type::RequestParameters
+
+          attr_reader contents: ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content]?
+
+          def contents=: (
+            ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content]
+          ) -> ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content]
+
+          attr_reader memory_id: String?
+
+          def memory_id=: (String) -> String
+
+          def initialize: (
+            ?contents: ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content],
+            ?memory_id: String,
+            ?request_options: AlchemystAI::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            contents: ::Array[AlchemystAI::V1::Context::MemoryAddParams::Content],
+            memory_id: String,
+            request_options: AlchemystAI::RequestOptions
+          }
+
+          type content = { content: String }
+
+          class Content < AlchemystAI::Internal::Type::BaseModel
+            attr_reader content: String?
+
+            def content=: (String) -> String
+
+            def initialize: (?content: String) -> void
+
+            def to_hash: -> { content: String }
+          end
+        end
+      end
+    end
+  end
+end

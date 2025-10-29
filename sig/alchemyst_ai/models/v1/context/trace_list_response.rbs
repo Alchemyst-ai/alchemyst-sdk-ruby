@@ -1,0 +1,82 @@
+module AlchemystAI
+  module Models
+    module V1
+      module Context
+        type trace_list_response =
+          {
+            traces: ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]
+          }
+
+        class TraceListResponse < AlchemystAI::Internal::Type::BaseModel
+          attr_reader traces: ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]?
+
+          def traces=: (
+            ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]
+          ) -> ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]
+
+          def initialize: (
+            ?traces: ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]
+          ) -> void
+
+          def to_hash: -> {
+            traces: ::Array[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]
+          }
+
+          type trace =
+            {
+              _id: String,
+              created_at: Time,
+              data: top,
+              type: String,
+              updated_at: Time,
+              user_id: String
+            }
+
+          class Trace < AlchemystAI::Internal::Type::BaseModel
+            attr_reader _id: String?
+
+            def _id=: (String) -> String
+
+            attr_reader created_at: Time?
+
+            def created_at=: (Time) -> Time
+
+            attr_reader data: top?
+
+            def data=: (top) -> top
+
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader updated_at: Time?
+
+            def updated_at=: (Time) -> Time
+
+            attr_reader user_id: String?
+
+            def user_id=: (String) -> String
+
+            def initialize: (
+              ?_id: String,
+              ?created_at: Time,
+              ?data: top,
+              ?type: String,
+              ?updated_at: Time,
+              ?user_id: String
+            ) -> void
+
+            def to_hash: -> {
+              _id: String,
+              created_at: Time,
+              data: top,
+              type: String,
+              updated_at: Time,
+              user_id: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+require_relative "../../../test_helper"
+
+class AlchemystAI::Test::Resources::V1::Context::TracesTest < AlchemystAI::Test::ResourceTest
+  def test_list
+    skip("Prism tests are disabled")
+
+    response = @alchemyst_ai.v1.context.traces.list
+
+    assert_pattern do
+      response => AlchemystAI::Models::V1::Context::TraceListResponse
+    end
+
+    assert_pattern do
+      response => {
+        traces: ^(AlchemystAI::Internal::Type::ArrayOf[AlchemystAI::Models::V1::Context::TraceListResponse::Trace]) | nil
+      }
+    end
+  end
+
+  def test_delete
+    skip("Prism tests are disabled")
+
+    response = @alchemyst_ai.v1.context.traces.delete("traceId")
+
+    assert_pattern do
+      response => AlchemystAI::Models::V1::Context::TraceDeleteResponse
+    end
+
+    assert_pattern do
+      response => {
+        trace: AlchemystAI::Internal::Type::Unknown | nil
+      }
+    end
+  end
+end

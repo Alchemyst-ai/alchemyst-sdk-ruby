@@ -40,9 +40,9 @@ Layout/LineLength:
   AllowedPatterns:
     - "^\\s*#.*$"
     - ^require(_relative)?
-    - "AlchemystAISDK::Internal::Type::BaseModel$"
+    - "AlchemystAI::Internal::Type::BaseModel$"
     - "^\\s*[A-Z0-9_]+ = :"
-    - "AlchemystAISDK::(Models|Resources|Test)::"
+    - "AlchemystAI::(Models|Resources|Test)::"
   Max: 110
 
 Layout/MultilineArrayLineBreaks:
