@@ -3,6 +3,16 @@
 require_relative "../../../test_helper"
 
 class Alchemystai::Test::Resources::V1::Context::MemoryTest < Alchemystai::Test::ResourceTest
+  def test_update
+    skip("Prism tests are disabled")
+
+    response = @alchemyst_ai.v1.context.memory.update
+
+    assert_pattern do
+      response => nil
+    end
+  end
+
   def test_delete
     skip("Prism tests are disabled")
 
