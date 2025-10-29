@@ -6,7 +6,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/alchemyst-ai).
+Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/alchemystai).
 
 The REST API documentation can be found on [docs.getalchemystai.com](https://docs.getalchemystai.com).
 
@@ -15,16 +15,16 @@ The REST API documentation can be found on [docs.getalchemystai.com](https://doc
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
 ```ruby
-gem "alchemyst-ai", "~> 0.0.1"
+gem "alchemystai", "~> 0.0.1"
 ```
 
 ## Usage
 
 ```ruby
 require "bundler/setup"
-require "alchemyst_ai"
+require "alchemystai"
 
-alchemyst_ai = AlchemystAI::Client.new(
+alchemyst_ai = Alchemystai::Client.new(
   api_key: ENV["ALCHEMYST_AI_API_KEY"] # This is the default and can be omitted
 )
 
@@ -41,7 +41,7 @@ puts(response)
 
 ### Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `AlchemystAI::Errors::APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `Alchemystai::Errors::APIError` will be thrown:
 
 ```ruby
 begin
@@ -52,12 +52,12 @@ begin
     scope: "internal",
     source: "platform.api.context.add"
   )
-rescue AlchemystAI::Errors::APIConnectionError => e
+rescue Alchemystai::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
-rescue AlchemystAI::Errors::RateLimitError => e
+rescue Alchemystai::Errors::RateLimitError => e
   puts("A 429 status code was received; we should back off a bit.")
-rescue AlchemystAI::Errors::APIStatusError => e
+rescue Alchemystai::Errors::APIStatusError => e
   puts("Another non-200-range status code was received")
   puts(e.status)
 end
@@ -89,7 +89,7 @@ You can use the `max_retries` option to configure or disable this:
 
 ```ruby
 # Configure the default for all requests:
-alchemyst_ai = AlchemystAI::Client.new(
+alchemyst_ai = Alchemystai::Client.new(
   max_retries: 0 # default is 2
 )
 
@@ -110,7 +110,7 @@ By default, requests will time out after 60 seconds. You can use the timeout opt
 
 ```ruby
 # Configure the default for all requests:
-alchemyst_ai = AlchemystAI::Client.new(
+alchemyst_ai = Alchemystai::Client.new(
   timeout: nil # default is 60
 )
 
@@ -125,7 +125,7 @@ alchemyst_ai.v1.context.add(
 )
 ```
 
-On timeout, `AlchemystAI::Errors::APITimeoutError` is raised.
+On timeout, `Alchemystai::Errors::APITimeoutError` is raised.
 
 Note that requests that time out are retried by default.
 
@@ -133,7 +133,7 @@ Note that requests that time out are retried by default.
 
 ### BaseModel
 
-All parameter and response objects inherit from `AlchemystAI::Internal::Type::BaseModel`, which provides several conveniences, including:
+All parameter and response objects inherit from `Alchemystai::Internal::Type::BaseModel`, which provides several conveniences, including:
 
 1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.
 
@@ -189,9 +189,9 @@ response = client.request(
 
 ### Concurrency & connection pooling
 
-The `AlchemystAI::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
+The `Alchemystai::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.
 
-Each instance of `AlchemystAI::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
+Each instance of `Alchemystai::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.
 
 When all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.
 
@@ -206,8 +206,8 @@ You can provide typesafe request parameters like so:
 ```ruby
 alchemyst_ai.v1.context.add(
   context_type: "resource",
-  documents: [AlchemystAI::V1::ContextAddParams::Document.new(content: "The content of the document")],
-  metadata: AlchemystAI::V1::ContextAddParams::Metadata.new(
+  documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
@@ -231,10 +231,10 @@ alchemyst_ai.v1.context.add(
 )
 
 # You can also splat a full Params class:
-params = AlchemystAI::V1::ContextAddParams.new(
+params = Alchemystai::V1::ContextAddParams.new(
   context_type: "resource",
-  documents: [AlchemystAI::V1::ContextAddParams::Document.new(content: "The content of the document")],
-  metadata: AlchemystAI::V1::ContextAddParams::Metadata.new(
+  documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
@@ -252,10 +252,10 @@ Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::E
 
 ```ruby
 # :resource
-puts(AlchemystAI::V1::ContextAddParams::ContextType::RESOURCE)
+puts(Alchemystai::V1::ContextAddParams::ContextType::RESOURCE)
 
-# Revealed type: `T.all(AlchemystAI::V1::ContextAddParams::ContextType, Symbol)`
-T.reveal_type(AlchemystAI::V1::ContextAddParams::ContextType::RESOURCE)
+# Revealed type: `T.all(Alchemystai::V1::ContextAddParams::ContextType, Symbol)`
+T.reveal_type(Alchemystai::V1::ContextAddParams::ContextType::RESOURCE)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
@@ -263,7 +263,7 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 ```ruby
 # Using the enum constants preserves the tagged type information:
 alchemyst_ai.v1.context.add(
-  context_type: AlchemystAI::V1::ContextAddParams::ContextType::RESOURCE,
+  context_type: Alchemystai::V1::ContextAddParams::ContextType::RESOURCE,
   # …
 )
 

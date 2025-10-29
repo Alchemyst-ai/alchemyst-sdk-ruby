@@ -11,7 +11,7 @@ GIT
 PATH
   remote: .
   specs:
-    alchemyst-ai (0.0.1)
+    alchemystai (0.0.1)
       connection_pool
 
 GEM
@@ -202,7 +202,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  alchemyst-ai!
+  alchemystai!
   async
   minitest
   minitest-focus

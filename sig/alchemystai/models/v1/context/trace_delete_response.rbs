@@ -1,0 +1,19 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type trace_delete_response = { trace: top }
+
+        class TraceDeleteResponse < Alchemystai::Internal::Type::BaseModel
+          attr_reader trace: top?
+
+          def trace=: (top) -> top
+
+          def initialize: (?trace: top) -> void
+
+          def to_hash: -> { trace: top }
+        end
+      end
+    end
+  end
+end

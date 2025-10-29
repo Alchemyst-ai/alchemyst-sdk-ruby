@@ -1,3 +1,0 @@
-module AlchemystAI
-  module V1 = AlchemystAI::Models::V1
-end
