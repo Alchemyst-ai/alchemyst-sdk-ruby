@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "anuran@getalchemystai.com"
   s.homepage = "https://gemdocs.org/gems/alchemystai"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/alchemyst-ai-sdk-ruby"
+  s.metadata["source_code_uri"] = "https://github.com/Alchemyst-ai/alchemyst-sdk-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
