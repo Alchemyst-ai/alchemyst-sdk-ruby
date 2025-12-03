@@ -10,6 +10,7 @@ module Alchemystai
           include Alchemystai::Internal::Type::RequestParameters
 
           # @!attribute user_ids
+          #   @deprecated
           #
           #   @return [Array<String>]
           required :user_ids, Alchemystai::Internal::Type::ArrayOf[String], api_name: :userIds

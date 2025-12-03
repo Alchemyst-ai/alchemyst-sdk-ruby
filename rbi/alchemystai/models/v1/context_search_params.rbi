@@ -29,10 +29,28 @@ module Alchemystai
 
         # Additional metadata for the search
         sig { returns(T.nilable(T.anything)) }
-        attr_reader :metadata
+        attr_reader :body_metadata
 
-        sig { params(metadata: T.anything).void }
-        attr_writer :metadata
+        sig { params(body_metadata: T.anything).void }
+        attr_writer :body_metadata
+
+        # Controls the search mode:
+        #
+        # - mode=fast → prioritizes speed over completeness.
+        # - mode=standard → performs a comprehensive search (default if omitted).
+        sig do
+          returns(
+            T.nilable(Alchemystai::V1::ContextSearchParams::Mode::OrSymbol)
+          )
+        end
+        attr_reader :mode
+
+        sig do
+          params(
+            mode: Alchemystai::V1::ContextSearchParams::Mode::OrSymbol
+          ).void
+        end
+        attr_writer :mode
 
         # Search scope
         sig do
@@ -61,7 +79,8 @@ module Alchemystai
             minimum_similarity_threshold: Float,
             query: String,
             similarity_threshold: Float,
-            metadata: T.anything,
+            body_metadata: T.anything,
+            mode: Alchemystai::V1::ContextSearchParams::Mode::OrSymbol,
             scope: Alchemystai::V1::ContextSearchParams::Scope::OrSymbol,
             user_id: String,
             request_options: Alchemystai::RequestOptions::OrHash
@@ -75,7 +94,12 @@ module Alchemystai
           # Maximum similarity threshold (must be >= minimum_similarity_threshold)
           similarity_threshold:,
           # Additional metadata for the search
-          metadata: nil,
+          body_metadata: nil,
+          # Controls the search mode:
+          #
+          # - mode=fast → prioritizes speed over completeness.
+          # - mode=standard → performs a comprehensive search (default if omitted).
+          mode: nil,
           # Search scope
           scope: nil,
           # The ID of the user making the request
@@ -90,7 +114,8 @@ module Alchemystai
               minimum_similarity_threshold: Float,
               query: String,
               similarity_threshold: Float,
-              metadata: T.anything,
+              body_metadata: T.anything,
+              mode: Alchemystai::V1::ContextSearchParams::Mode::OrSymbol,
               scope: Alchemystai::V1::ContextSearchParams::Scope::OrSymbol,
               user_id: String,
               request_options: Alchemystai::RequestOptions
@@ -98,6 +123,39 @@ module Alchemystai
           )
         end
         def to_hash
+        end
+
+        # Controls the search mode:
+        #
+        # - mode=fast → prioritizes speed over completeness.
+        # - mode=standard → performs a comprehensive search (default if omitted).
+        module Mode
+          extend Alchemystai::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Alchemystai::V1::ContextSearchParams::Mode)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          FAST =
+            T.let(
+              :fast,
+              Alchemystai::V1::ContextSearchParams::Mode::TaggedSymbol
+            )
+          STANDARD =
+            T.let(
+              :standard,
+              Alchemystai::V1::ContextSearchParams::Mode::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Alchemystai::V1::ContextSearchParams::Mode::TaggedSymbol]
+            )
+          end
+          def self.values
+          end
         end
 
         # Search scope

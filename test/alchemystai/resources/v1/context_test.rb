@@ -29,7 +29,7 @@ class Alchemystai::Test::Resources::V1::ContextTest < Alchemystai::Test::Resourc
     response =
       @alchemyst_ai.v1.context.search(
         minimum_similarity_threshold: 0.5,
-        query: "search query for user preferences",
+        query: "What did the customer ask about pricing for the Scale plan?",
         similarity_threshold: 0.8
       )
 

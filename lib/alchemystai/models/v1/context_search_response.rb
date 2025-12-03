@@ -26,6 +26,7 @@ module Alchemystai
           optional :created_at, Time, api_name: :createdAt
 
           # @!attribute metadata
+          #   Only included when query parameter metadata=true
           #
           #   @return [Object, nil]
           optional :metadata, Alchemystai::Internal::Type::Unknown
@@ -42,9 +43,13 @@ module Alchemystai
 
           # @!method initialize(content: nil, created_at: nil, metadata: nil, score: nil, updated_at: nil)
           #   @param content [String]
+          #
           #   @param created_at [Time]
-          #   @param metadata [Object]
+          #
+          #   @param metadata [Object] Only included when query parameter metadata=true
+          #
           #   @param score [Float]
+          #
           #   @param updated_at [Time]
         end
       end
