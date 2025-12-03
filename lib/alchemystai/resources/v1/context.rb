@@ -75,22 +75,27 @@ module Alchemystai
           )
         end
 
+        # Some parameter documentations has been truncated, see
+        # {Alchemystai::Models::V1::ContextSearchParams} for more details.
+        #
         # This endpoint sends a search request to the context processor to retrieve
         # relevant context data based on the provided query.
         #
-        # @overload search(minimum_similarity_threshold:, query:, similarity_threshold:, metadata: nil, scope: nil, user_id: nil, request_options: {})
+        # @overload search(minimum_similarity_threshold:, query:, similarity_threshold:, body_metadata: nil, mode: nil, scope: nil, user_id: nil, request_options: {})
         #
-        # @param minimum_similarity_threshold [Float] Minimum similarity threshold
+        # @param minimum_similarity_threshold [Float] Body param: Minimum similarity threshold
         #
-        # @param query [String] The search query used to search for context data
+        # @param query [String] Body param: The search query used to search for context data
         #
-        # @param similarity_threshold [Float] Maximum similarity threshold (must be >= minimum_similarity_threshold)
+        # @param similarity_threshold [Float] Body param: Maximum similarity threshold (must be >= minimum_similarity_threshol
         #
-        # @param metadata [Object] Additional metadata for the search
+        # @param body_metadata [Object] Body param: Additional metadata for the search
         #
-        # @param scope [Symbol, Alchemystai::Models::V1::ContextSearchParams::Scope] Search scope
+        # @param mode [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode] Query param: Controls the search mode:
         #
-        # @param user_id [String] The ID of the user making the request
+        # @param scope [Symbol, Alchemystai::Models::V1::ContextSearchParams::Scope] Body param: Search scope
+        #
+        # @param user_id [String] Body param: The ID of the user making the request
         #
         # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
         #
@@ -99,10 +104,12 @@ module Alchemystai
         # @see Alchemystai::Models::V1::ContextSearchParams
         def search(params)
           parsed, options = Alchemystai::V1::ContextSearchParams.dump_request(params)
+          query_params = [:query_metadata, :mode]
           @client.request(
             method: :post,
             path: "api/v1/context/search",
-            body: parsed,
+            query: parsed.slice(*query_params).transform_keys(query_metadata: "metadata"),
+            body: parsed.except(*query_params),
             model: Alchemystai::Models::V1::ContextSearchResponse,
             options: options
           )

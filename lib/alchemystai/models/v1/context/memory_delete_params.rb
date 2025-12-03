@@ -22,6 +22,8 @@ module Alchemystai
           optional :organization_id, String, nil?: true
 
           # @!attribute user_id
+          #   @deprecated
+          #
           #   Optional user ID
           #
           #   @return [String, nil]

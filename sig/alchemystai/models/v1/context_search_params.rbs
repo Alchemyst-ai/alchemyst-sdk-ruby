@@ -6,7 +6,8 @@ module Alchemystai
           minimum_similarity_threshold: Float,
           query: String,
           similarity_threshold: Float,
-          metadata: top,
+          body_metadata: top,
+          mode: Alchemystai::Models::V1::ContextSearchParams::mode,
           scope: Alchemystai::Models::V1::ContextSearchParams::scope,
           user_id: String
         }
@@ -22,9 +23,15 @@ module Alchemystai
 
         attr_accessor similarity_threshold: Float
 
-        attr_reader metadata: top?
+        attr_reader body_metadata: top?
 
-        def metadata=: (top) -> top
+        def body_metadata=: (top) -> top
+
+        attr_reader mode: Alchemystai::Models::V1::ContextSearchParams::mode?
+
+        def mode=: (
+          Alchemystai::Models::V1::ContextSearchParams::mode
+        ) -> Alchemystai::Models::V1::ContextSearchParams::mode
 
         attr_reader scope: Alchemystai::Models::V1::ContextSearchParams::scope?
 
@@ -40,7 +47,8 @@ module Alchemystai
           minimum_similarity_threshold: Float,
           query: String,
           similarity_threshold: Float,
-          ?metadata: top,
+          ?body_metadata: top,
+          ?mode: Alchemystai::Models::V1::ContextSearchParams::mode,
           ?scope: Alchemystai::Models::V1::ContextSearchParams::scope,
           ?user_id: String,
           ?request_options: Alchemystai::request_opts
@@ -50,11 +58,23 @@ module Alchemystai
           minimum_similarity_threshold: Float,
           query: String,
           similarity_threshold: Float,
-          metadata: top,
+          body_metadata: top,
+          mode: Alchemystai::Models::V1::ContextSearchParams::mode,
           scope: Alchemystai::Models::V1::ContextSearchParams::scope,
           user_id: String,
           request_options: Alchemystai::RequestOptions
         }
+
+        type mode = :fast | :standard
+
+        module Mode
+          extend Alchemystai::Internal::Type::Enum
+
+          FAST: :fast
+          STANDARD: :standard
+
+          def self?.values: -> ::Array[Alchemystai::Models::V1::ContextSearchParams::mode]
+        end
 
         type scope = :internal | :external
 

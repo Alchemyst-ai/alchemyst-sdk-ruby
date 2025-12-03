@@ -26,11 +26,20 @@ module Alchemystai
         #   @return [Float]
         required :similarity_threshold, Float
 
-        # @!attribute metadata
+        # @!attribute body_metadata
         #   Additional metadata for the search
         #
         #   @return [Object, nil]
-        optional :metadata, Alchemystai::Internal::Type::Unknown
+        optional :body_metadata, Alchemystai::Internal::Type::Unknown, api_name: :metadata
+
+        # @!attribute mode
+        #   Controls the search mode:
+        #
+        #   - mode=fast → prioritizes speed over completeness.
+        #   - mode=standard → performs a comprehensive search (default if omitted).
+        #
+        #   @return [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode, nil]
+        optional :mode, enum: -> { Alchemystai::V1::ContextSearchParams::Mode }
 
         # @!attribute scope
         #   Search scope
@@ -39,25 +48,46 @@ module Alchemystai
         optional :scope, enum: -> { Alchemystai::V1::ContextSearchParams::Scope }
 
         # @!attribute user_id
+        #   @deprecated
+        #
         #   The ID of the user making the request
         #
         #   @return [String, nil]
         optional :user_id, String
 
-        # @!method initialize(minimum_similarity_threshold:, query:, similarity_threshold:, metadata: nil, scope: nil, user_id: nil, request_options: {})
+        # @!method initialize(minimum_similarity_threshold:, query:, similarity_threshold:, body_metadata: nil, mode: nil, scope: nil, user_id: nil, request_options: {})
+        #   Some parameter documentations has been truncated, see
+        #   {Alchemystai::Models::V1::ContextSearchParams} for more details.
+        #
         #   @param minimum_similarity_threshold [Float] Minimum similarity threshold
         #
         #   @param query [String] The search query used to search for context data
         #
         #   @param similarity_threshold [Float] Maximum similarity threshold (must be >= minimum_similarity_threshold)
         #
-        #   @param metadata [Object] Additional metadata for the search
+        #   @param body_metadata [Object] Additional metadata for the search
+        #
+        #   @param mode [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode] Controls the search mode:
         #
         #   @param scope [Symbol, Alchemystai::Models::V1::ContextSearchParams::Scope] Search scope
         #
         #   @param user_id [String] The ID of the user making the request
         #
         #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
+
+        # Controls the search mode:
+        #
+        # - mode=fast → prioritizes speed over completeness.
+        # - mode=standard → performs a comprehensive search (default if omitted).
+        module Mode
+          extend Alchemystai::Internal::Type::Enum
+
+          FAST = :fast
+          STANDARD = :standard
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # Search scope
         module Scope

@@ -30,7 +30,8 @@ module Alchemystai
           minimum_similarity_threshold: Float,
           query: String,
           similarity_threshold: Float,
-          ?metadata: top,
+          ?body_metadata: top,
+          ?mode: Alchemystai::Models::V1::ContextSearchParams::mode,
           ?scope: Alchemystai::Models::V1::ContextSearchParams::scope,
           ?user_id: String,
           ?request_options: Alchemystai::request_opts

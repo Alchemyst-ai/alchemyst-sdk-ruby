@@ -33,6 +33,8 @@ module Alchemystai
         optional :source, String
 
         # @!attribute user_id
+        #   @deprecated
+        #
         #   Optional user ID
         #
         #   @return [String, nil]
