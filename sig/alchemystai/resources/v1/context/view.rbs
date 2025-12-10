@@ -4,6 +4,8 @@ module Alchemystai
       class Context
         class View
           def retrieve: (
+            ?file_name: String,
+            ?magic_key: String,
             ?request_options: Alchemystai::request_opts
           ) -> Alchemystai::Models::V1::Context::ViewRetrieveResponse
 
