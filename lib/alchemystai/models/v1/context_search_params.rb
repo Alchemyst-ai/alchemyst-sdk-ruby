@@ -9,8 +9,6 @@ module Alchemystai
         include Alchemystai::Internal::Type::RequestParameters
 
         # @!attribute minimum_similarity_threshold
-        #   @deprecated
-        #
         #   Minimum similarity threshold
         #
         #   @return [Float]

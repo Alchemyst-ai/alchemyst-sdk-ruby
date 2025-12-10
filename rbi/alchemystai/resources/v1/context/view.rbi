@@ -8,10 +8,18 @@ module Alchemystai
           # Gets the context information for the authenticated user
           sig do
             params(
+              file_name: String,
+              magic_key: String,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(Alchemystai::Models::V1::Context::ViewRetrieveResponse)
           end
-          def retrieve(request_options: {})
+          def retrieve(
+            # Name of the file to retrieve context for
+            file_name: nil,
+            # Magic key for context retrieval
+            magic_key: nil,
+            request_options: {}
+          )
           end
 
           # Fetches documents view for authenticated user with optional organization context

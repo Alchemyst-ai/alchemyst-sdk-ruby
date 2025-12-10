@@ -16,16 +16,44 @@ module Alchemystai
               )
             end
 
+          # Name of the file to retrieve context for
+          sig { returns(T.nilable(String)) }
+          attr_reader :file_name
+
+          sig { params(file_name: String).void }
+          attr_writer :file_name
+
+          # Magic key for context retrieval
+          sig { returns(T.nilable(String)) }
+          attr_reader :magic_key
+
+          sig { params(magic_key: String).void }
+          attr_writer :magic_key
+
           sig do
             params(
+              file_name: String,
+              magic_key: String,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
-          def self.new(request_options: {})
+          def self.new(
+            # Name of the file to retrieve context for
+            file_name: nil,
+            # Magic key for context retrieval
+            magic_key: nil,
+            request_options: {}
+          )
           end
 
           sig do
-            override.returns({ request_options: Alchemystai::RequestOptions })
+            override.returns(
+              {
+                file_name: String,
+                magic_key: String,
+                request_options: Alchemystai::RequestOptions
+              }
+            )
           end
           def to_hash
           end
