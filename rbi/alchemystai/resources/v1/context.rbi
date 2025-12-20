@@ -76,8 +76,9 @@ module Alchemystai
             minimum_similarity_threshold: Float,
             query: String,
             similarity_threshold: Float,
-            body_metadata: T.anything,
+            metadata: Alchemystai::V1::ContextSearchParams::Metadata::OrSymbol,
             mode: Alchemystai::V1::ContextSearchParams::Mode::OrSymbol,
+            body_metadata: T.anything,
             scope: Alchemystai::V1::ContextSearchParams::Scope::OrSymbol,
             user_id: String,
             request_options: Alchemystai::RequestOptions::OrHash
@@ -91,13 +92,20 @@ module Alchemystai
           # Body param: Maximum similarity threshold (must be >=
           # minimum_similarity_threshold)
           similarity_threshold:,
-          # Body param: Additional metadata for the search
-          body_metadata: nil,
+          # Query param: Controls whether metadata is included in the response:
+          #
+          # - metadata=true → metadata will be included in each context item in the
+          #   response.
+          # - metadata=false (or omitted) → metadata will be excluded from the response for
+          #   better performance.
+          metadata: nil,
           # Query param: Controls the search mode:
           #
           # - mode=fast → prioritizes speed over completeness.
           # - mode=standard → performs a comprehensive search (default if omitted).
           mode: nil,
+          # Body param: Additional metadata for the search
+          body_metadata: nil,
           # Body param: Search scope
           scope: nil,
           # Body param: The ID of the user making the request
