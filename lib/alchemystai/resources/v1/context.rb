@@ -81,7 +81,7 @@ module Alchemystai
         # This endpoint sends a search request to the context processor to retrieve
         # relevant context data based on the provided query.
         #
-        # @overload search(minimum_similarity_threshold:, query:, similarity_threshold:, body_metadata: nil, mode: nil, scope: nil, user_id: nil, request_options: {})
+        # @overload search(minimum_similarity_threshold:, query:, similarity_threshold:, metadata: nil, mode: nil, body_metadata: nil, scope: nil, user_id: nil, request_options: {})
         #
         # @param minimum_similarity_threshold [Float] Body param: Minimum similarity threshold
         #
@@ -89,9 +89,11 @@ module Alchemystai
         #
         # @param similarity_threshold [Float] Body param: Maximum similarity threshold (must be >= minimum_similarity_threshol
         #
-        # @param body_metadata [Object] Body param: Additional metadata for the search
+        # @param metadata [Symbol, Alchemystai::Models::V1::ContextSearchParams::Metadata] Query param: Controls whether metadata is included in the response:
         #
         # @param mode [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode] Query param: Controls the search mode:
+        #
+        # @param body_metadata [Object] Body param: Additional metadata for the search
         #
         # @param scope [Symbol, Alchemystai::Models::V1::ContextSearchParams::Scope] Body param: Search scope
         #
@@ -104,11 +106,11 @@ module Alchemystai
         # @see Alchemystai::Models::V1::ContextSearchParams
         def search(params)
           parsed, options = Alchemystai::V1::ContextSearchParams.dump_request(params)
-          query_params = [:query_metadata, :mode]
+          query_params = [:metadata, :mode]
           @client.request(
             method: :post,
             path: "api/v1/context/search",
-            query: parsed.slice(*query_params).transform_keys(query_metadata: "metadata"),
+            query: parsed.slice(*query_params),
             body: parsed.except(*query_params),
             model: Alchemystai::Models::V1::ContextSearchResponse,
             options: options

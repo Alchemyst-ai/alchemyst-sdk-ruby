@@ -26,11 +26,16 @@ module Alchemystai
         #   @return [Float]
         required :similarity_threshold, Float
 
-        # @!attribute body_metadata
-        #   Additional metadata for the search
+        # @!attribute metadata
+        #   Controls whether metadata is included in the response:
         #
-        #   @return [Object, nil]
-        optional :body_metadata, Alchemystai::Internal::Type::Unknown, api_name: :metadata
+        #   - metadata=true → metadata will be included in each context item in the
+        #     response.
+        #   - metadata=false (or omitted) → metadata will be excluded from the response for
+        #     better performance.
+        #
+        #   @return [Symbol, Alchemystai::Models::V1::ContextSearchParams::Metadata, nil]
+        optional :metadata, enum: -> { Alchemystai::V1::ContextSearchParams::Metadata }
 
         # @!attribute mode
         #   Controls the search mode:
@@ -40,6 +45,12 @@ module Alchemystai
         #
         #   @return [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode, nil]
         optional :mode, enum: -> { Alchemystai::V1::ContextSearchParams::Mode }
+
+        # @!attribute body_metadata
+        #   Additional metadata for the search
+        #
+        #   @return [Object, nil]
+        optional :body_metadata, Alchemystai::Internal::Type::Unknown
 
         # @!attribute scope
         #   Search scope
@@ -55,7 +66,7 @@ module Alchemystai
         #   @return [String, nil]
         optional :user_id, String
 
-        # @!method initialize(minimum_similarity_threshold:, query:, similarity_threshold:, body_metadata: nil, mode: nil, scope: nil, user_id: nil, request_options: {})
+        # @!method initialize(minimum_similarity_threshold:, query:, similarity_threshold:, metadata: nil, mode: nil, body_metadata: nil, scope: nil, user_id: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {Alchemystai::Models::V1::ContextSearchParams} for more details.
         #
@@ -65,15 +76,33 @@ module Alchemystai
         #
         #   @param similarity_threshold [Float] Maximum similarity threshold (must be >= minimum_similarity_threshold)
         #
-        #   @param body_metadata [Object] Additional metadata for the search
+        #   @param metadata [Symbol, Alchemystai::Models::V1::ContextSearchParams::Metadata] Controls whether metadata is included in the response:
         #
         #   @param mode [Symbol, Alchemystai::Models::V1::ContextSearchParams::Mode] Controls the search mode:
+        #
+        #   @param body_metadata [Object] Additional metadata for the search
         #
         #   @param scope [Symbol, Alchemystai::Models::V1::ContextSearchParams::Scope] Search scope
         #
         #   @param user_id [String] The ID of the user making the request
         #
         #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
+
+        # Controls whether metadata is included in the response:
+        #
+        # - metadata=true → metadata will be included in each context item in the
+        #   response.
+        # - metadata=false (or omitted) → metadata will be excluded from the response for
+        #   better performance.
+        module Metadata
+          extend Alchemystai::Internal::Type::Enum
+
+          TRUE = :true
+          FALSE = :false
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
+        end
 
         # Controls the search mode:
         #
