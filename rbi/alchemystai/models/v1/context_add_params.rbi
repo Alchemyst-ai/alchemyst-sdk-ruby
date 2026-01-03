@@ -17,35 +17,21 @@ module Alchemystai
 
         # Type of context being added
         sig do
-          returns(
-            T.nilable(Alchemystai::V1::ContextAddParams::ContextType::OrSymbol)
-          )
+          returns(Alchemystai::V1::ContextAddParams::ContextType::OrSymbol)
         end
-        attr_reader :context_type
-
-        sig do
-          params(
-            context_type:
-              Alchemystai::V1::ContextAddParams::ContextType::OrSymbol
-          ).void
-        end
-        attr_writer :context_type
+        attr_accessor :context_type
 
         # Array of documents with content and additional metadata
-        sig do
-          returns(
-            T.nilable(T::Array[Alchemystai::V1::ContextAddParams::Document])
-          )
-        end
-        attr_reader :documents
+        sig { returns(T::Array[Alchemystai::V1::ContextAddParams::Document]) }
+        attr_accessor :documents
 
-        sig do
-          params(
-            documents:
-              T::Array[Alchemystai::V1::ContextAddParams::Document::OrHash]
-          ).void
-        end
-        attr_writer :documents
+        # Scope of the context
+        sig { returns(Alchemystai::V1::ContextAddParams::Scope::OrSymbol) }
+        attr_accessor :scope
+
+        # The source of the context data
+        sig { returns(String) }
+        attr_accessor :source
 
         # Additional metadata for the context
         sig { returns(T.nilable(Alchemystai::V1::ContextAddParams::Metadata)) }
@@ -58,47 +44,29 @@ module Alchemystai
         end
         attr_writer :metadata
 
-        # Scope of the context
-        sig do
-          returns(T.nilable(Alchemystai::V1::ContextAddParams::Scope::OrSymbol))
-        end
-        attr_reader :scope
-
-        sig do
-          params(scope: Alchemystai::V1::ContextAddParams::Scope::OrSymbol).void
-        end
-        attr_writer :scope
-
-        # The source of the context data
-        sig { returns(T.nilable(String)) }
-        attr_reader :source
-
-        sig { params(source: String).void }
-        attr_writer :source
-
         sig do
           params(
             context_type:
               Alchemystai::V1::ContextAddParams::ContextType::OrSymbol,
             documents:
               T::Array[Alchemystai::V1::ContextAddParams::Document::OrHash],
-            metadata: Alchemystai::V1::ContextAddParams::Metadata::OrHash,
             scope: Alchemystai::V1::ContextAddParams::Scope::OrSymbol,
             source: String,
+            metadata: Alchemystai::V1::ContextAddParams::Metadata::OrHash,
             request_options: Alchemystai::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           # Type of context being added
-          context_type: nil,
+          context_type:,
           # Array of documents with content and additional metadata
-          documents: nil,
+          documents:,
+          # Scope of the context
+          scope:,
+          # The source of the context data
+          source:,
           # Additional metadata for the context
           metadata: nil,
-          # Scope of the context
-          scope: nil,
-          # The source of the context data
-          source: nil,
           request_options: {}
         )
         end
@@ -109,9 +77,9 @@ module Alchemystai
               context_type:
                 Alchemystai::V1::ContextAddParams::ContextType::OrSymbol,
               documents: T::Array[Alchemystai::V1::ContextAddParams::Document],
-              metadata: Alchemystai::V1::ContextAddParams::Metadata,
               scope: Alchemystai::V1::ContextAddParams::Scope::OrSymbol,
               source: String,
+              metadata: Alchemystai::V1::ContextAddParams::Metadata,
               request_options: Alchemystai::RequestOptions
             }
           )
@@ -181,6 +149,36 @@ module Alchemystai
 
           sig { override.returns({ content: String }) }
           def to_hash
+          end
+        end
+
+        # Scope of the context
+        module Scope
+          extend Alchemystai::Internal::Type::Enum
+
+          TaggedSymbol =
+            T.type_alias do
+              T.all(Symbol, Alchemystai::V1::ContextAddParams::Scope)
+            end
+          OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+          INTERNAL =
+            T.let(
+              :internal,
+              Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol
+            )
+          EXTERNAL =
+            T.let(
+              :external,
+              Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol
+            )
+
+          sig do
+            override.returns(
+              T::Array[Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol]
+            )
+          end
+          def self.values
           end
         end
 
@@ -264,36 +262,6 @@ module Alchemystai
             )
           end
           def to_hash
-          end
-        end
-
-        # Scope of the context
-        module Scope
-          extend Alchemystai::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(Symbol, Alchemystai::V1::ContextAddParams::Scope)
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          INTERNAL =
-            T.let(
-              :internal,
-              Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol
-            )
-          EXTERNAL =
-            T.let(
-              :external,
-              Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[Alchemystai::V1::ContextAddParams::Scope::TaggedSymbol]
-            )
-          end
-          def self.values
           end
         end
       end

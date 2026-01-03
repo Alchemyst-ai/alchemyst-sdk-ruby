@@ -15,39 +15,46 @@ module Alchemystai
 
           sig do
             returns(
-              T.nilable(
-                T::Array[
-                  Alchemystai::Models::V1::Context::TraceListResponse::Trace
-                ]
-              )
+              Alchemystai::Models::V1::Context::TraceListResponse::Pagination
             )
           end
-          attr_reader :traces
+          attr_reader :pagination
 
           sig do
             params(
-              traces:
-                T::Array[
-                  Alchemystai::Models::V1::Context::TraceListResponse::Trace::OrHash
-                ]
+              pagination:
+                Alchemystai::Models::V1::Context::TraceListResponse::Pagination::OrHash
             ).void
           end
-          attr_writer :traces
+          attr_writer :pagination
+
+          sig do
+            returns(
+              T::Array[
+                Alchemystai::Models::V1::Context::TraceListResponse::Trace
+              ]
+            )
+          end
+          attr_accessor :traces
 
           sig do
             params(
+              pagination:
+                Alchemystai::Models::V1::Context::TraceListResponse::Pagination::OrHash,
               traces:
                 T::Array[
                   Alchemystai::Models::V1::Context::TraceListResponse::Trace::OrHash
                 ]
             ).returns(T.attached_class)
           end
-          def self.new(traces: nil)
+          def self.new(pagination:, traces:)
           end
 
           sig do
             override.returns(
               {
+                pagination:
+                  Alchemystai::Models::V1::Context::TraceListResponse::Pagination,
                 traces:
                   T::Array[
                     Alchemystai::Models::V1::Context::TraceListResponse::Trace
@@ -56,6 +63,69 @@ module Alchemystai
             )
           end
           def to_hash
+          end
+
+          class Pagination < Alchemystai::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Alchemystai::Models::V1::Context::TraceListResponse::Pagination,
+                  Alchemystai::Internal::AnyHash
+                )
+              end
+
+            sig { returns(T::Boolean) }
+            attr_accessor :has_next_page
+
+            sig { returns(T::Boolean) }
+            attr_accessor :has_prev_page
+
+            sig { returns(Integer) }
+            attr_accessor :limit
+
+            sig { returns(Integer) }
+            attr_accessor :page
+
+            sig { returns(Integer) }
+            attr_accessor :total
+
+            sig { returns(Integer) }
+            attr_accessor :total_pages
+
+            sig do
+              params(
+                has_next_page: T::Boolean,
+                has_prev_page: T::Boolean,
+                limit: Integer,
+                page: Integer,
+                total: Integer,
+                total_pages: Integer
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              has_next_page:,
+              has_prev_page:,
+              limit:,
+              page:,
+              total:,
+              total_pages:
+            )
+            end
+
+            sig do
+              override.returns(
+                {
+                  has_next_page: T::Boolean,
+                  has_prev_page: T::Boolean,
+                  limit: Integer,
+                  page: Integer,
+                  total: Integer,
+                  total_pages: Integer
+                }
+              )
+            end
+            def to_hash
+            end
           end
 
           class Trace < Alchemystai::Internal::Type::BaseModel
@@ -67,59 +137,46 @@ module Alchemystai
                 )
               end
 
-            sig { returns(T.nilable(String)) }
-            attr_reader :_id
+            sig { returns(String) }
+            attr_accessor :_id
 
-            sig { params(_id: String).void }
-            attr_writer :_id
+            sig { returns(Time) }
+            attr_accessor :created_at
 
-            sig { returns(T.nilable(Time)) }
-            attr_reader :created_at
+            sig { returns(T.anything) }
+            attr_accessor :data
 
-            sig { params(created_at: Time).void }
-            attr_writer :created_at
+            sig { returns(String) }
+            attr_accessor :organization_id
 
-            sig { returns(T.nilable(T.anything)) }
-            attr_reader :data
+            sig { returns(String) }
+            attr_accessor :type
 
-            sig { params(data: T.anything).void }
-            attr_writer :data
+            sig { returns(Time) }
+            attr_accessor :updated_at
 
-            sig { returns(T.nilable(String)) }
-            attr_reader :type
-
-            sig { params(type: String).void }
-            attr_writer :type
-
-            sig { returns(T.nilable(Time)) }
-            attr_reader :updated_at
-
-            sig { params(updated_at: Time).void }
-            attr_writer :updated_at
-
-            sig { returns(T.nilable(String)) }
-            attr_reader :user_id
-
-            sig { params(user_id: String).void }
-            attr_writer :user_id
+            sig { returns(String) }
+            attr_accessor :user_id
 
             sig do
               params(
                 _id: String,
                 created_at: Time,
                 data: T.anything,
+                organization_id: String,
                 type: String,
                 updated_at: Time,
                 user_id: String
               ).returns(T.attached_class)
             end
             def self.new(
-              _id: nil,
-              created_at: nil,
-              data: nil,
-              type: nil,
-              updated_at: nil,
-              user_id: nil
+              _id:,
+              created_at:,
+              data:,
+              organization_id:,
+              type:,
+              updated_at:,
+              user_id:
             )
             end
 
@@ -129,6 +186,7 @@ module Alchemystai
                   _id: String,
                   created_at: Time,
                   data: T.anything,
+                  organization_id: String,
                   type: String,
                   updated_at: Time,
                   user_id: String

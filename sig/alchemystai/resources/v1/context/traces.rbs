@@ -4,6 +4,8 @@ module Alchemystai
       class Context
         class Traces
           def list: (
+            ?limit: Integer,
+            ?page: Integer,
             ?request_options: Alchemystai::request_opts
           ) -> Alchemystai::Models::V1::Context::TraceListResponse
 

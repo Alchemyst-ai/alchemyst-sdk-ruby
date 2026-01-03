@@ -1,0 +1,30 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type memory_update_response =
+          { memory_id: String, success: bool, updated_entries: Float }
+
+        class MemoryUpdateResponse < Alchemystai::Internal::Type::BaseModel
+          attr_accessor memory_id: String
+
+          attr_accessor success: bool
+
+          attr_accessor updated_entries: Float
+
+          def initialize: (
+            memory_id: String,
+            success: bool,
+            updated_entries: Float
+          ) -> void
+
+          def to_hash: -> {
+            memory_id: String,
+            success: bool,
+            updated_entries: Float
+          }
+        end
+      end
+    end
+  end
+end

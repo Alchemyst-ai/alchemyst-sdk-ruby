@@ -12,14 +12,26 @@ module Alchemystai
           # @!attribute memory_id
           #   The ID of the memory to delete
           #
-          #   @return [String, nil]
-          optional :memory_id, String, api_name: :memoryId
+          #   @return [String]
+          required :memory_id, String, api_name: :memoryId
 
           # @!attribute organization_id
-          #   Optional organization ID
+          #   Organization ID
           #
           #   @return [String, nil]
-          optional :organization_id, String, nil?: true
+          required :organization_id, String, nil?: true
+
+          # @!attribute by_doc
+          #   Delete by document flag
+          #
+          #   @return [Boolean, nil]
+          optional :by_doc, Alchemystai::Internal::Type::Boolean, nil?: true
+
+          # @!attribute by_id
+          #   Delete by ID flag
+          #
+          #   @return [Boolean, nil]
+          optional :by_id, Alchemystai::Internal::Type::Boolean, nil?: true
 
           # @!attribute user_id
           #   @deprecated
@@ -29,10 +41,14 @@ module Alchemystai
           #   @return [String, nil]
           optional :user_id, String, nil?: true
 
-          # @!method initialize(memory_id: nil, organization_id: nil, user_id: nil, request_options: {})
+          # @!method initialize(memory_id:, organization_id:, by_doc: nil, by_id: nil, user_id: nil, request_options: {})
           #   @param memory_id [String] The ID of the memory to delete
           #
-          #   @param organization_id [String, nil] Optional organization ID
+          #   @param organization_id [String, nil] Organization ID
+          #
+          #   @param by_doc [Boolean, nil] Delete by document flag
+          #
+          #   @param by_id [Boolean, nil] Delete by ID flag
           #
           #   @param user_id [String, nil] Optional user ID
           #

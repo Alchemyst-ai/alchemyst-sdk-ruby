@@ -5,9 +5,9 @@ module Alchemystai
         {
           context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
           documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
-          metadata: Alchemystai::V1::ContextAddParams::Metadata,
           scope: Alchemystai::Models::V1::ContextAddParams::scope,
-          source: String
+          source: String,
+          metadata: Alchemystai::V1::ContextAddParams::Metadata
         }
         & Alchemystai::Internal::Type::request_parameters
 
@@ -15,17 +15,13 @@ module Alchemystai
         extend Alchemystai::Internal::Type::RequestParameters::Converter
         include Alchemystai::Internal::Type::RequestParameters
 
-        attr_reader context_type: Alchemystai::Models::V1::ContextAddParams::context_type?
+        attr_accessor context_type: Alchemystai::Models::V1::ContextAddParams::context_type
 
-        def context_type=: (
-          Alchemystai::Models::V1::ContextAddParams::context_type
-        ) -> Alchemystai::Models::V1::ContextAddParams::context_type
+        attr_accessor documents: ::Array[Alchemystai::V1::ContextAddParams::Document]
 
-        attr_reader documents: ::Array[Alchemystai::V1::ContextAddParams::Document]?
+        attr_accessor scope: Alchemystai::Models::V1::ContextAddParams::scope
 
-        def documents=: (
-          ::Array[Alchemystai::V1::ContextAddParams::Document]
-        ) -> ::Array[Alchemystai::V1::ContextAddParams::Document]
+        attr_accessor source: String
 
         attr_reader metadata: Alchemystai::V1::ContextAddParams::Metadata?
 
@@ -33,31 +29,21 @@ module Alchemystai
           Alchemystai::V1::ContextAddParams::Metadata
         ) -> Alchemystai::V1::ContextAddParams::Metadata
 
-        attr_reader scope: Alchemystai::Models::V1::ContextAddParams::scope?
-
-        def scope=: (
-          Alchemystai::Models::V1::ContextAddParams::scope
-        ) -> Alchemystai::Models::V1::ContextAddParams::scope
-
-        attr_reader source: String?
-
-        def source=: (String) -> String
-
         def initialize: (
-          ?context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
-          ?documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
+          context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
+          documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
+          scope: Alchemystai::Models::V1::ContextAddParams::scope,
+          source: String,
           ?metadata: Alchemystai::V1::ContextAddParams::Metadata,
-          ?scope: Alchemystai::Models::V1::ContextAddParams::scope,
-          ?source: String,
           ?request_options: Alchemystai::request_opts
         ) -> void
 
         def to_hash: -> {
           context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
           documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
-          metadata: Alchemystai::V1::ContextAddParams::Metadata,
           scope: Alchemystai::Models::V1::ContextAddParams::scope,
           source: String,
+          metadata: Alchemystai::V1::ContextAddParams::Metadata,
           request_options: Alchemystai::RequestOptions
         }
 
@@ -83,6 +69,17 @@ module Alchemystai
           def initialize: (?content: String) -> void
 
           def to_hash: -> { content: String }
+        end
+
+        type scope = :internal | :external
+
+        module Scope
+          extend Alchemystai::Internal::Type::Enum
+
+          INTERNAL: :internal
+          EXTERNAL: :external
+
+          def self?.values: -> ::Array[Alchemystai::Models::V1::ContextAddParams::scope]
         end
 
         type metadata =
@@ -130,17 +127,6 @@ module Alchemystai
             group_name: ::Array[String],
             last_modified: String
           }
-        end
-
-        type scope = :internal | :external
-
-        module Scope
-          extend Alchemystai::Internal::Type::Enum
-
-          INTERNAL: :internal
-          EXTERNAL: :external
-
-          def self?.values: -> ::Array[Alchemystai::Models::V1::ContextAddParams::scope]
         end
       end
     end

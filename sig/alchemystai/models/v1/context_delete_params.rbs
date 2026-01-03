@@ -3,10 +3,10 @@ module Alchemystai
     module V1
       type context_delete_params =
         {
+          organization_id: String,
+          source: String,
           by_doc: bool?,
           by_id: bool?,
-          organization_id: String?,
-          source: String,
           user_id: String?
         }
         & Alchemystai::Internal::Type::request_parameters
@@ -15,32 +15,30 @@ module Alchemystai
         extend Alchemystai::Internal::Type::RequestParameters::Converter
         include Alchemystai::Internal::Type::RequestParameters
 
+        attr_accessor organization_id: String
+
+        attr_accessor source: String
+
         attr_accessor by_doc: bool?
 
         attr_accessor by_id: bool?
 
-        attr_accessor organization_id: String?
-
-        attr_reader source: String?
-
-        def source=: (String) -> String
-
         attr_accessor user_id: String?
 
         def initialize: (
+          organization_id: String,
+          source: String,
           ?by_doc: bool?,
           ?by_id: bool?,
-          ?organization_id: String?,
-          ?source: String,
           ?user_id: String?,
           ?request_options: Alchemystai::request_opts
         ) -> void
 
         def to_hash: -> {
+          organization_id: String,
+          source: String,
           by_doc: bool?,
           by_id: bool?,
-          organization_id: String?,
-          source: String,
           user_id: String?,
           request_options: Alchemystai::RequestOptions
         }

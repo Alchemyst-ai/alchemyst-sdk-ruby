@@ -19,29 +19,14 @@ module Alchemystai
           # Array of content objects with additional properties allowed
           sig do
             returns(
-              T.nilable(
-                T::Array[Alchemystai::V1::Context::MemoryAddParams::Content]
-              )
+              T::Array[Alchemystai::V1::Context::MemoryAddParams::Content]
             )
           end
-          attr_reader :contents
-
-          sig do
-            params(
-              contents:
-                T::Array[
-                  Alchemystai::V1::Context::MemoryAddParams::Content::OrHash
-                ]
-            ).void
-          end
-          attr_writer :contents
+          attr_accessor :contents
 
           # The ID of the memory
-          sig { returns(T.nilable(String)) }
-          attr_reader :memory_id
-
-          sig { params(memory_id: String).void }
-          attr_writer :memory_id
+          sig { returns(String) }
+          attr_accessor :memory_id
 
           sig do
             params(
@@ -55,9 +40,9 @@ module Alchemystai
           end
           def self.new(
             # Array of content objects with additional properties allowed
-            contents: nil,
+            contents:,
             # The ID of the memory
-            memory_id: nil,
+            memory_id:,
             request_options: {}
           )
           end
@@ -84,17 +69,75 @@ module Alchemystai
                 )
               end
 
+            # Unique message ID
+            sig { returns(T.nilable(String)) }
+            attr_reader :id
+
+            sig { params(id: String).void }
+            attr_writer :id
+
+            # The content of the memory message
             sig { returns(T.nilable(String)) }
             attr_reader :content
 
             sig { params(content: String).void }
             attr_writer :content
 
-            sig { params(content: String).returns(T.attached_class) }
-            def self.new(content: nil)
+            # Creation timestamp
+            sig { returns(T.nilable(String)) }
+            attr_reader :created_at
+
+            sig { params(created_at: String).void }
+            attr_writer :created_at
+
+            # Additional metadata for the message
+            sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+            attr_reader :metadata
+
+            sig { params(metadata: T::Hash[Symbol, T.anything]).void }
+            attr_writer :metadata
+
+            # Role of the message sender (e.g., user, assistant)
+            sig { returns(T.nilable(String)) }
+            attr_reader :role
+
+            sig { params(role: String).void }
+            attr_writer :role
+
+            sig do
+              params(
+                id: String,
+                content: String,
+                created_at: String,
+                metadata: T::Hash[Symbol, T.anything],
+                role: String
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Unique message ID
+              id: nil,
+              # The content of the memory message
+              content: nil,
+              # Creation timestamp
+              created_at: nil,
+              # Additional metadata for the message
+              metadata: nil,
+              # Role of the message sender (e.g., user, assistant)
+              role: nil
+            )
             end
 
-            sig { override.returns({ content: String }) }
+            sig do
+              override.returns(
+                {
+                  id: String,
+                  content: String,
+                  created_at: String,
+                  metadata: T::Hash[Symbol, T.anything],
+                  role: String
+                }
+              )
+            end
             def to_hash
             end
           end

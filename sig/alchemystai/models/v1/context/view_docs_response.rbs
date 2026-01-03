@@ -2,7 +2,59 @@ module Alchemystai
   module Models
     module V1
       module Context
-        ViewDocsResponse: Alchemystai::Internal::Type::Converter
+        type view_docs_response =
+          {
+            documents: ::Array[Alchemystai::Models::V1::Context::ViewDocsResponse::Document]
+          }
+
+        class ViewDocsResponse < Alchemystai::Internal::Type::BaseModel
+          attr_accessor documents: ::Array[Alchemystai::Models::V1::Context::ViewDocsResponse::Document]
+
+          def initialize: (
+            documents: ::Array[Alchemystai::Models::V1::Context::ViewDocsResponse::Document]
+          ) -> void
+
+          def to_hash: -> {
+            documents: ::Array[Alchemystai::Models::V1::Context::ViewDocsResponse::Document]
+          }
+
+          type document =
+            {
+              file_name: String,
+              file_size: Float,
+              file_type: String,
+              group_name: ::Array[String],
+              last_modified: String
+            }
+
+          class Document < Alchemystai::Internal::Type::BaseModel
+            attr_accessor file_name: String
+
+            attr_accessor file_size: Float
+
+            attr_accessor file_type: String
+
+            attr_accessor group_name: ::Array[String]
+
+            attr_accessor last_modified: String
+
+            def initialize: (
+              file_name: String,
+              file_size: Float,
+              file_type: String,
+              group_name: ::Array[String],
+              last_modified: String
+            ) -> void
+
+            def to_hash: -> {
+              file_name: String,
+              file_size: Float,
+              file_type: String,
+              group_name: ::Array[String],
+              last_modified: String
+            }
+          end
+        end
       end
     end
   end

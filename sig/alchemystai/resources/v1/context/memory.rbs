@@ -4,23 +4,25 @@ module Alchemystai
       class Context
         class Memory
           def update: (
-            ?contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            ?memory_id: String,
+            contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            memory_id: String,
             ?request_options: Alchemystai::request_opts
-          ) -> nil
+          ) -> Alchemystai::Models::V1::Context::MemoryUpdateResponse
 
           def delete: (
-            ?memory_id: String,
-            ?organization_id: String?,
+            memory_id: String,
+            organization_id: String?,
+            ?by_doc: bool?,
+            ?by_id: bool?,
             ?user_id: String?,
             ?request_options: Alchemystai::request_opts
           ) -> nil
 
           def add: (
-            ?contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
-            ?memory_id: String,
+            contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
+            memory_id: String,
             ?request_options: Alchemystai::request_opts
-          ) -> nil
+          ) -> Alchemystai::Models::V1::Context::MemoryAddResponse
 
           def initialize: (client: Alchemystai::Client) -> void
         end

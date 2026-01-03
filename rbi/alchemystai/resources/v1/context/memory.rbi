@@ -14,31 +14,37 @@ module Alchemystai
                 ],
               memory_id: String,
               request_options: Alchemystai::RequestOptions::OrHash
-            ).void
+            ).returns(Alchemystai::Models::V1::Context::MemoryUpdateResponse)
           end
           def update(
             # Array of updated content objects
-            contents: nil,
+            contents:,
             # The ID of the memory to update
-            memory_id: nil,
+            memory_id:,
             request_options: {}
           )
           end
 
-          # Deletes memory context data based on provided parameters
+          # Deletes memory context data based on provided parameters.
           sig do
             params(
               memory_id: String,
               organization_id: T.nilable(String),
+              by_doc: T.nilable(T::Boolean),
+              by_id: T.nilable(T::Boolean),
               user_id: T.nilable(String),
               request_options: Alchemystai::RequestOptions::OrHash
             ).void
           end
           def delete(
             # The ID of the memory to delete
-            memory_id: nil,
-            # Optional organization ID
-            organization_id: nil,
+            memory_id:,
+            # Organization ID
+            organization_id:,
+            # Delete by document flag
+            by_doc: nil,
+            # Delete by ID flag
+            by_id: nil,
             # Optional user ID
             user_id: nil,
             request_options: {}
@@ -54,13 +60,13 @@ module Alchemystai
                 ],
               memory_id: String,
               request_options: Alchemystai::RequestOptions::OrHash
-            ).void
+            ).returns(Alchemystai::Models::V1::Context::MemoryAddResponse)
           end
           def add(
             # Array of content objects with additional properties allowed
-            contents: nil,
+            contents:,
             # The ID of the memory
-            memory_id: nil,
+            memory_id:,
             request_options: {}
           )
           end

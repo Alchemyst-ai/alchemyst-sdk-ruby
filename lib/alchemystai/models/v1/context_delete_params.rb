@@ -8,6 +8,18 @@ module Alchemystai
         extend Alchemystai::Internal::Type::RequestParameters::Converter
         include Alchemystai::Internal::Type::RequestParameters
 
+        # @!attribute organization_id
+        #   Organization ID
+        #
+        #   @return [String]
+        required :organization_id, String
+
+        # @!attribute source
+        #   Source identifier for the context
+        #
+        #   @return [String]
+        required :source, String
+
         # @!attribute by_doc
         #   Flag to delete by document
         #
@@ -20,18 +32,6 @@ module Alchemystai
         #   @return [Boolean, nil]
         optional :by_id, Alchemystai::Internal::Type::Boolean, nil?: true
 
-        # @!attribute organization_id
-        #   Optional organization ID
-        #
-        #   @return [String, nil]
-        optional :organization_id, String, nil?: true
-
-        # @!attribute source
-        #   Source identifier for the context
-        #
-        #   @return [String, nil]
-        optional :source, String
-
         # @!attribute user_id
         #   @deprecated
         #
@@ -40,14 +40,14 @@ module Alchemystai
         #   @return [String, nil]
         optional :user_id, String, nil?: true
 
-        # @!method initialize(by_doc: nil, by_id: nil, organization_id: nil, source: nil, user_id: nil, request_options: {})
+        # @!method initialize(organization_id:, source:, by_doc: nil, by_id: nil, user_id: nil, request_options: {})
+        #   @param organization_id [String] Organization ID
+        #
+        #   @param source [String] Source identifier for the context
+        #
         #   @param by_doc [Boolean, nil] Flag to delete by document
         #
         #   @param by_id [Boolean, nil] Flag to delete by ID
-        #
-        #   @param organization_id [String, nil] Optional organization ID
-        #
-        #   @param source [String] Source identifier for the context
         #
         #   @param user_id [String, nil] Optional user ID
         #
