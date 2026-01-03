@@ -26,6 +26,18 @@ module Alchemystai
           ?request_options: Alchemystai::request_opts
         ) -> Alchemystai::Models::V1::ContextAddResponse
 
+        def search: (
+          minimum_similarity_threshold: Float,
+          query: String,
+          similarity_threshold: Float,
+          ?metadata: Alchemystai::Models::V1::ContextSearchParams::metadata,
+          ?mode: Alchemystai::Models::V1::ContextSearchParams::mode,
+          ?body_metadata: top,
+          ?scope: Alchemystai::Models::V1::ContextSearchParams::scope,
+          ?user_id: String,
+          ?request_options: Alchemystai::request_opts
+        ) -> Alchemystai::Models::V1::ContextSearchResponse
+
         def initialize: (client: Alchemystai::Client) -> void
       end
     end
