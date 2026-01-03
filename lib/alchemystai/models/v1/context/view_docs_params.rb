@@ -9,7 +9,15 @@ module Alchemystai
           extend Alchemystai::Internal::Type::RequestParameters::Converter
           include Alchemystai::Internal::Type::RequestParameters
 
-          # @!method initialize(request_options: {})
+          # @!attribute magic_key
+          #   Optional magic key for special access or filtering
+          #
+          #   @return [String, nil]
+          optional :magic_key, String
+
+          # @!method initialize(magic_key: nil, request_options: {})
+          #   @param magic_key [String] Optional magic key for special access or filtering
+          #
           #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
         end
       end

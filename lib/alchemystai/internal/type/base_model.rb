@@ -438,9 +438,11 @@ module Alchemystai
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `context_search_response` is a `Alchemystai::Models::V1::ContextSearchResponse`
-        #   context_search_response => {
-        #     contexts: contexts
+        #   # `context_add_response` is a `Alchemystai::Models::V1::ContextAddResponse`
+        #   context_add_response => {
+        #     context_id: context_id,
+        #     success: success,
+        #     processed_documents: processed_documents
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

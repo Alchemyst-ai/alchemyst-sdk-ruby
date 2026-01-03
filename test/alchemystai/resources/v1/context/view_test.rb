@@ -14,7 +14,8 @@ class Alchemystai::Test::Resources::V1::Context::ViewTest < Alchemystai::Test::R
 
     assert_pattern do
       response => {
-        context: ^(Alchemystai::Internal::Type::ArrayOf[Alchemystai::Internal::Type::Unknown]) | nil
+        contexts: ^(Alchemystai::Internal::Type::ArrayOf[Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context]),
+        success: Alchemystai::Internal::Type::Boolean
       }
     end
   end
@@ -25,7 +26,13 @@ class Alchemystai::Test::Resources::V1::Context::ViewTest < Alchemystai::Test::R
     response = @alchemyst_ai.v1.context.view.docs
 
     assert_pattern do
-      response => Alchemystai::Internal::Type::Unknown
+      response => Alchemystai::Models::V1::Context::ViewDocsResponse
+    end
+
+    assert_pattern do
+      response => {
+        documents: ^(Alchemystai::Internal::Type::ArrayOf[Alchemystai::Models::V1::Context::ViewDocsResponse::Document])
+      }
     end
   end
 end

@@ -3,15 +3,32 @@ module Alchemystai
     module V1
       module Context
         type trace_list_params =
-          {  } & Alchemystai::Internal::Type::request_parameters
+          { limit: Integer, page: Integer }
+          & Alchemystai::Internal::Type::request_parameters
 
         class TraceListParams < Alchemystai::Internal::Type::BaseModel
           extend Alchemystai::Internal::Type::RequestParameters::Converter
           include Alchemystai::Internal::Type::RequestParameters
 
-          def initialize: (?request_options: Alchemystai::request_opts) -> void
+          attr_reader limit: Integer?
 
-          def to_hash: -> { request_options: Alchemystai::RequestOptions }
+          def limit=: (Integer) -> Integer
+
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          def initialize: (
+            ?limit: Integer,
+            ?page: Integer,
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            limit: Integer,
+            page: Integer,
+            request_options: Alchemystai::RequestOptions
+          }
         end
       end
     end

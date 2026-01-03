@@ -5,9 +5,13 @@ module Alchemystai
     class V1
       class Context
         class Traces
-          # Retrieves a list of traces for the authenticated user
+          # Returns paginated traces for the authenticated user within their organization.
           #
-          # @overload list(request_options: {})
+          # @overload list(limit: nil, page: nil, request_options: {})
+          #
+          # @param limit [Integer] Number of traces per page
+          #
+          # @param page [Integer] Page number for pagination
           #
           # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
           #
@@ -15,19 +19,21 @@ module Alchemystai
           #
           # @see Alchemystai::Models::V1::Context::TraceListParams
           def list(params = {})
+            parsed, options = Alchemystai::V1::Context::TraceListParams.dump_request(params)
             @client.request(
               method: :get,
               path: "api/v1/context/traces",
+              query: parsed,
               model: Alchemystai::Models::V1::Context::TraceListResponse,
-              options: params[:request_options]
+              options: options
             )
           end
 
-          # Deletes a data trace for the authenticated user with the specified trace ID
+          # Deletes a data trace for the authenticated user with the specified trace ID.
           #
           # @overload delete(trace_id, request_options: {})
           #
-          # @param trace_id [String] ID of the trace to delete
+          # @param trace_id [String] The ID of the trace to delete
           #
           # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
           #

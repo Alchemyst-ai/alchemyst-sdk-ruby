@@ -3,24 +3,34 @@ module Alchemystai
     module V1
       module Context
         type memory_delete_params =
-          { memory_id: String, organization_id: String?, user_id: String? }
+          {
+            memory_id: String,
+            organization_id: String?,
+            by_doc: bool?,
+            by_id: bool?,
+            user_id: String?
+          }
           & Alchemystai::Internal::Type::request_parameters
 
         class MemoryDeleteParams < Alchemystai::Internal::Type::BaseModel
           extend Alchemystai::Internal::Type::RequestParameters::Converter
           include Alchemystai::Internal::Type::RequestParameters
 
-          attr_reader memory_id: String?
-
-          def memory_id=: (String) -> String
+          attr_accessor memory_id: String
 
           attr_accessor organization_id: String?
+
+          attr_accessor by_doc: bool?
+
+          attr_accessor by_id: bool?
 
           attr_accessor user_id: String?
 
           def initialize: (
-            ?memory_id: String,
-            ?organization_id: String?,
+            memory_id: String,
+            organization_id: String?,
+            ?by_doc: bool?,
+            ?by_id: bool?,
             ?user_id: String?,
             ?request_options: Alchemystai::request_opts
           ) -> void
@@ -28,6 +38,8 @@ module Alchemystai
           def to_hash: -> {
             memory_id: String,
             organization_id: String?,
+            by_doc: bool?,
+            by_id: bool?,
             user_id: String?,
             request_options: Alchemystai::RequestOptions
           }

@@ -2,16 +2,101 @@ module Alchemystai
   module Models
     module V1
       module Context
-        type view_retrieve_response = { context: ::Array[top] }
+        type view_retrieve_response =
+          {
+            contexts: ::Array[Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context],
+            success: bool
+          }
 
         class ViewRetrieveResponse < Alchemystai::Internal::Type::BaseModel
-          attr_reader context: ::Array[top]?
+          attr_accessor contexts: ::Array[Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context]
 
-          def context=: (::Array[top]) -> ::Array[top]
+          attr_accessor success: bool
 
-          def initialize: (?context: ::Array[top]) -> void
+          def initialize: (
+            contexts: ::Array[Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context],
+            success: bool
+          ) -> void
 
-          def to_hash: -> { context: ::Array[top] }
+          def to_hash: -> {
+            contexts: ::Array[Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context],
+            success: bool
+          }
+
+          type context =
+            {
+              content: String,
+              metadata: Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata
+            }
+
+          class Context < Alchemystai::Internal::Type::BaseModel
+            attr_reader content: String?
+
+            def content=: (String) -> String
+
+            attr_reader metadata: Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata?
+
+            def metadata=: (
+              Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata
+            ) -> Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata
+
+            def initialize: (
+              ?content: String,
+              ?metadata: Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata
+            ) -> void
+
+            def to_hash: -> {
+              content: String,
+              metadata: Alchemystai::Models::V1::Context::ViewRetrieveResponse::Context::Metadata
+            }
+
+            type metadata =
+              {
+                file_name: String,
+                file_size: Float,
+                file_type: String,
+                group_name: ::Array[String],
+                last_modified: String
+              }
+
+            class Metadata < Alchemystai::Internal::Type::BaseModel
+              attr_reader file_name: String?
+
+              def file_name=: (String) -> String
+
+              attr_reader file_size: Float?
+
+              def file_size=: (Float) -> Float
+
+              attr_reader file_type: String?
+
+              def file_type=: (String) -> String
+
+              attr_reader group_name: ::Array[String]?
+
+              def group_name=: (::Array[String]) -> ::Array[String]
+
+              attr_reader last_modified: String?
+
+              def last_modified=: (String) -> String
+
+              def initialize: (
+                ?file_name: String,
+                ?file_size: Float,
+                ?file_type: String,
+                ?group_name: ::Array[String],
+                ?last_modified: String
+              ) -> void
+
+              def to_hash: -> {
+                file_name: String,
+                file_size: Float,
+                file_type: String,
+                group_name: ::Array[String],
+                last_modified: String
+              }
+            end
+          end
         end
       end
     end

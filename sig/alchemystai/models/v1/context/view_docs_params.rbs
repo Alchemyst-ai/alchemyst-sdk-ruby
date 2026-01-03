@@ -3,15 +3,26 @@ module Alchemystai
     module V1
       module Context
         type view_docs_params =
-          {  } & Alchemystai::Internal::Type::request_parameters
+          { magic_key: String }
+          & Alchemystai::Internal::Type::request_parameters
 
         class ViewDocsParams < Alchemystai::Internal::Type::BaseModel
           extend Alchemystai::Internal::Type::RequestParameters::Converter
           include Alchemystai::Internal::Type::RequestParameters
 
-          def initialize: (?request_options: Alchemystai::request_opts) -> void
+          attr_reader magic_key: String?
 
-          def to_hash: -> { request_options: Alchemystai::RequestOptions }
+          def magic_key=: (String) -> String
+
+          def initialize: (
+            ?magic_key: String,
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            magic_key: String,
+            request_options: Alchemystai::RequestOptions
+          }
         end
       end
     end

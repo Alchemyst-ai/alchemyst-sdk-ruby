@@ -35,12 +35,12 @@ alchemyst_ai = Alchemystai::Client.new(
 response = alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
-  source: "platform.api.context.add"
+  source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
 )
 
-puts(response)
+puts(response.context_id)
 ```
 
 ### Handling errors
@@ -52,9 +52,9 @@ begin
   context = alchemyst_ai.v1.context.add(
     context_type: "resource",
     documents: [{content: "The content of the document"}],
-    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     scope: "internal",
-    source: "platform.api.context.add"
+    source: "platform.api.context.add",
+    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
   )
 rescue Alchemystai::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -101,9 +101,9 @@ alchemyst_ai = Alchemystai::Client.new(
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
   source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   request_options: {max_retries: 5}
 )
 ```
@@ -122,9 +122,9 @@ alchemyst_ai = Alchemystai::Client.new(
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
   source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   request_options: {timeout: 5}
 )
 ```
@@ -160,9 +160,9 @@ response =
   alchemyst_ai.v1.context.add(
     context_type: "resource",
     documents: [{content: "The content of the document"}],
-    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     scope: "internal",
     source: "platform.api.context.add",
+    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -211,14 +211,14 @@ You can provide typesafe request parameters like so:
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  scope: "internal",
+  source: "platform.api.context.add",
   metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
     file_size: 1024
-  ),
-  scope: "internal",
-  source: "platform.api.context.add"
+  )
 )
 ```
 
@@ -229,23 +229,23 @@ Or, equivalently:
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
-  source: "platform.api.context.add"
+  source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
 )
 
 # You can also splat a full Params class:
 params = Alchemystai::V1::ContextAddParams.new(
   context_type: "resource",
   documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  scope: "internal",
+  source: "platform.api.context.add",
   metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
     file_size: 1024
-  ),
-  scope: "internal",
-  source: "platform.api.context.add"
+  )
 )
 alchemyst_ai.v1.context.add(**params)
 ```

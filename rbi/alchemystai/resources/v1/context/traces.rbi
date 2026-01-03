@@ -5,16 +5,24 @@ module Alchemystai
     class V1
       class Context
         class Traces
-          # Retrieves a list of traces for the authenticated user
+          # Returns paginated traces for the authenticated user within their organization.
           sig do
             params(
+              limit: Integer,
+              page: Integer,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(Alchemystai::Models::V1::Context::TraceListResponse)
           end
-          def list(request_options: {})
+          def list(
+            # Number of traces per page
+            limit: nil,
+            # Page number for pagination
+            page: nil,
+            request_options: {}
+          )
           end
 
-          # Deletes a data trace for the authenticated user with the specified trace ID
+          # Deletes a data trace for the authenticated user with the specified trace ID.
           sig do
             params(
               trace_id: String,
@@ -22,7 +30,7 @@ module Alchemystai
             ).returns(Alchemystai::Models::V1::Context::TraceDeleteResponse)
           end
           def delete(
-            # ID of the trace to delete
+            # The ID of the trace to delete
             trace_id,
             request_options: {}
           )

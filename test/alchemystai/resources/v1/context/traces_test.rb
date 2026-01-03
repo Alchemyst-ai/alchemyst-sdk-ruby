@@ -14,7 +14,8 @@ class Alchemystai::Test::Resources::V1::Context::TracesTest < Alchemystai::Test:
 
     assert_pattern do
       response => {
-        traces: ^(Alchemystai::Internal::Type::ArrayOf[Alchemystai::Models::V1::Context::TraceListResponse::Trace]) | nil
+        pagination: Alchemystai::Models::V1::Context::TraceListResponse::Pagination,
+        traces: ^(Alchemystai::Internal::Type::ArrayOf[Alchemystai::Models::V1::Context::TraceListResponse::Trace])
       }
     end
   end
@@ -30,7 +31,7 @@ class Alchemystai::Test::Resources::V1::Context::TracesTest < Alchemystai::Test:
 
     assert_pattern do
       response => {
-        trace: Alchemystai::Internal::Type::Unknown | nil
+        trace: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace
       }
     end
   end
