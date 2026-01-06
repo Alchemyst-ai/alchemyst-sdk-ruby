@@ -97,6 +97,9 @@ module Alchemystai
         module Metadata
           extend Alchemystai::Internal::Type::Enum
 
+          TRUE = :true
+          FALSE = :false
+
           # @!method self.values
           #   @return [Array<Symbol>]
         end
