@@ -5,7 +5,8 @@ module Alchemystai
         type memory_add_params =
           {
             contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
-            memory_id: String
+            memory_id: String,
+            metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata
           }
           & Alchemystai::Internal::Type::request_parameters
 
@@ -17,63 +18,68 @@ module Alchemystai
 
           attr_accessor memory_id: String
 
+          attr_reader metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata?
+
+          def metadata=: (
+            Alchemystai::V1::Context::MemoryAddParams::Metadata
+          ) -> Alchemystai::V1::Context::MemoryAddParams::Metadata
+
           def initialize: (
             contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
             memory_id: String,
+            ?metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
             ?request_options: Alchemystai::request_opts
           ) -> void
 
           def to_hash: -> {
             contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
             memory_id: String,
+            metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
             request_options: Alchemystai::RequestOptions
           }
 
           type content =
             {
-              id: String,
               content: String,
-              created_at: String,
-              metadata: ::Hash[Symbol, top],
-              role: String
+              metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
             }
 
           class Content < Alchemystai::Internal::Type::BaseModel
-            attr_reader id: String?
+            attr_accessor content: String
 
-            def id=: (String) -> String
-
-            attr_reader content: String?
-
-            def content=: (String) -> String
-
-            attr_reader created_at: String?
-
-            def created_at=: (String) -> String
-
-            attr_reader metadata: ::Hash[Symbol, top]?
-
-            def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
-
-            attr_reader role: String?
-
-            def role=: (String) -> String
+            attr_accessor metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
 
             def initialize: (
-              ?id: String,
-              ?content: String,
-              ?created_at: String,
-              ?metadata: ::Hash[Symbol, top],
-              ?role: String
+              content: String,
+              metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
             ) -> void
 
             def to_hash: -> {
-              id: String,
               content: String,
-              created_at: String,
-              metadata: ::Hash[Symbol, top],
-              role: String
+              metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
             }
+
+            type metadata = { message_id: String }
+
+            class Metadata < Alchemystai::Internal::Type::BaseModel
+              attr_accessor message_id: String
+
+              def initialize: (message_id: String) -> void
+
+              def to_hash: -> { message_id: String }
+            end
+          end
+
+          type metadata = { group_name: ::Array[String] }
+
+          class Metadata < Alchemystai::Internal::Type::BaseModel
+            attr_reader group_name: ::Array[String]?
+
+            def group_name=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (?group_name: ::Array[String]) -> void
+
+            def to_hash: -> { group_name: ::Array[String] }
           end
         end
       end

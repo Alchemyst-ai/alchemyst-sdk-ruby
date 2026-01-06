@@ -16,7 +16,7 @@ module Alchemystai
               )
             end
 
-          # Array of content objects with additional properties allowed
+          # Array of content objects with metadata
           sig do
             returns(
               T::Array[Alchemystai::V1::Context::MemoryAddParams::Content]
@@ -28,6 +28,22 @@ module Alchemystai
           sig { returns(String) }
           attr_accessor :memory_id
 
+          # Optional metadata with groupName defaulting to ["default"]
+          sig do
+            returns(
+              T.nilable(Alchemystai::V1::Context::MemoryAddParams::Metadata)
+            )
+          end
+          attr_reader :metadata
+
+          sig do
+            params(
+              metadata:
+                Alchemystai::V1::Context::MemoryAddParams::Metadata::OrHash
+            ).void
+          end
+          attr_writer :metadata
+
           sig do
             params(
               contents:
@@ -35,14 +51,18 @@ module Alchemystai
                   Alchemystai::V1::Context::MemoryAddParams::Content::OrHash
                 ],
               memory_id: String,
+              metadata:
+                Alchemystai::V1::Context::MemoryAddParams::Metadata::OrHash,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
-            # Array of content objects with additional properties allowed
+            # Array of content objects with metadata
             contents:,
             # The ID of the memory
             memory_id:,
+            # Optional metadata with groupName defaulting to ["default"]
+            metadata: nil,
             request_options: {}
           )
           end
@@ -53,6 +73,7 @@ module Alchemystai
                 contents:
                   T::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
                 memory_id: String,
+                metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
                 request_options: Alchemystai::RequestOptions
               }
             )
@@ -69,75 +90,104 @@ module Alchemystai
                 )
               end
 
-            # Unique message ID
-            sig { returns(T.nilable(String)) }
-            attr_reader :id
-
-            sig { params(id: String).void }
-            attr_writer :id
-
             # The content of the memory message
-            sig { returns(T.nilable(String)) }
-            attr_reader :content
+            sig { returns(String) }
+            attr_accessor :content
 
-            sig { params(content: String).void }
-            attr_writer :content
-
-            # Creation timestamp
-            sig { returns(T.nilable(String)) }
-            attr_reader :created_at
-
-            sig { params(created_at: String).void }
-            attr_writer :created_at
-
-            # Additional metadata for the message
-            sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+            sig do
+              returns(
+                Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+              )
+            end
             attr_reader :metadata
-
-            sig { params(metadata: T::Hash[Symbol, T.anything]).void }
-            attr_writer :metadata
-
-            # Role of the message sender (e.g., user, assistant)
-            sig { returns(T.nilable(String)) }
-            attr_reader :role
-
-            sig { params(role: String).void }
-            attr_writer :role
 
             sig do
               params(
-                id: String,
+                metadata:
+                  Alchemystai::V1::Context::MemoryAddParams::Content::Metadata::OrHash
+              ).void
+            end
+            attr_writer :metadata
+
+            sig do
+              params(
                 content: String,
-                created_at: String,
-                metadata: T::Hash[Symbol, T.anything],
-                role: String
+                metadata:
+                  Alchemystai::V1::Context::MemoryAddParams::Content::Metadata::OrHash
               ).returns(T.attached_class)
             end
             def self.new(
-              # Unique message ID
-              id: nil,
               # The content of the memory message
-              content: nil,
-              # Creation timestamp
-              created_at: nil,
-              # Additional metadata for the message
-              metadata: nil,
-              # Role of the message sender (e.g., user, assistant)
-              role: nil
+              content:,
+              metadata:
             )
             end
 
             sig do
               override.returns(
                 {
-                  id: String,
                   content: String,
-                  created_at: String,
-                  metadata: T::Hash[Symbol, T.anything],
-                  role: String
+                  metadata:
+                    Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
                 }
               )
             end
+            def to_hash
+            end
+
+            class Metadata < Alchemystai::Internal::Type::BaseModel
+              OrHash =
+                T.type_alias do
+                  T.any(
+                    Alchemystai::V1::Context::MemoryAddParams::Content::Metadata,
+                    Alchemystai::Internal::AnyHash
+                  )
+                end
+
+              # Unique message ID
+              sig { returns(String) }
+              attr_accessor :message_id
+
+              sig { params(message_id: String).returns(T.attached_class) }
+              def self.new(
+                # Unique message ID
+                message_id:
+              )
+              end
+
+              sig { override.returns({ message_id: String }) }
+              def to_hash
+              end
+            end
+          end
+
+          class Metadata < Alchemystai::Internal::Type::BaseModel
+            OrHash =
+              T.type_alias do
+                T.any(
+                  Alchemystai::V1::Context::MemoryAddParams::Metadata,
+                  Alchemystai::Internal::AnyHash
+                )
+              end
+
+            # Group names for the memory context
+            sig { returns(T.nilable(T::Array[String])) }
+            attr_reader :group_name
+
+            sig { params(group_name: T::Array[String]).void }
+            attr_writer :group_name
+
+            # Optional metadata with groupName defaulting to ["default"]
+            sig do
+              params(group_name: T::Array[String]).returns(T.attached_class)
+            end
+            def self.new(
+              # Group names for the memory context
+              group_name: nil
+            )
+            end
+
+            sig { override.returns({ group_name: T::Array[String] }) }
             def to_hash
             end
           end
