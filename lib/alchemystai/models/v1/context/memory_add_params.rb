@@ -10,7 +10,7 @@ module Alchemystai
           include Alchemystai::Internal::Type::RequestParameters
 
           # @!attribute contents
-          #   Array of content objects with metadata
+          #   Array of content objects with additional properties allowed
           #
           #   @return [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>]
           required :contents,
@@ -22,62 +22,54 @@ module Alchemystai
           #   @return [String]
           required :memory_id, String, api_name: :memoryId
 
-          # @!attribute metadata
-          #   Optional metadata with groupName defaulting to ["default"]
-          #
-          #   @return [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata, nil]
-          optional :metadata, -> { Alchemystai::V1::Context::MemoryAddParams::Metadata }
-
-          # @!method initialize(contents:, memory_id:, metadata: nil, request_options: {})
-          #   @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects with metadata
+          # @!method initialize(contents:, memory_id:, request_options: {})
+          #   @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects with additional properties allowed
           #
           #   @param memory_id [String] The ID of the memory
-          #
-          #   @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata with groupName defaulting to ["default"]
           #
           #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
 
           class Content < Alchemystai::Internal::Type::BaseModel
+            # @!attribute id
+            #   Unique message ID
+            #
+            #   @return [String, nil]
+            optional :id, String
+
             # @!attribute content
             #   The content of the memory message
             #
-            #   @return [String]
-            required :content, String
+            #   @return [String, nil]
+            optional :content, String
+
+            # @!attribute created_at
+            #   Creation timestamp
+            #
+            #   @return [String, nil]
+            optional :created_at, String, api_name: :createdAt
 
             # @!attribute metadata
+            #   Additional metadata for the message
             #
-            #   @return [Alchemystai::Models::V1::Context::MemoryAddParams::Content::Metadata]
-            required :metadata, -> { Alchemystai::V1::Context::MemoryAddParams::Content::Metadata }
+            #   @return [Hash{Symbol=>Object}, nil]
+            optional :metadata, Alchemystai::Internal::Type::HashOf[Alchemystai::Internal::Type::Unknown]
 
-            # @!method initialize(content:, metadata:)
+            # @!attribute role
+            #   Role of the message sender (e.g., user, assistant)
+            #
+            #   @return [String, nil]
+            optional :role, String
+
+            # @!method initialize(id: nil, content: nil, created_at: nil, metadata: nil, role: nil)
+            #   @param id [String] Unique message ID
+            #
             #   @param content [String] The content of the memory message
             #
-            #   @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Content::Metadata]
-
-            # @see Alchemystai::Models::V1::Context::MemoryAddParams::Content#metadata
-            class Metadata < Alchemystai::Internal::Type::BaseModel
-              # @!attribute message_id
-              #   Unique message ID
-              #
-              #   @return [String]
-              required :message_id, String, api_name: :messageId
-
-              # @!method initialize(message_id:)
-              #   @param message_id [String] Unique message ID
-            end
-          end
-
-          class Metadata < Alchemystai::Internal::Type::BaseModel
-            # @!attribute group_name
-            #   Group names for the memory context
+            #   @param created_at [String] Creation timestamp
             #
-            #   @return [Array<String>, nil]
-            optional :group_name, Alchemystai::Internal::Type::ArrayOf[String], api_name: :groupName
-
-            # @!method initialize(group_name: nil)
-            #   Optional metadata with groupName defaulting to ["default"]
+            #   @param metadata [Hash{Symbol=>Object}] Additional metadata for the message
             #
-            #   @param group_name [Array<String>] Group names for the memory context
+            #   @param role [String] Role of the message sender (e.g., user, assistant)
           end
         end
       end

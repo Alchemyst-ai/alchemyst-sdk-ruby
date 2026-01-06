@@ -39,17 +39,7 @@ class Alchemystai::Test::Resources::V1::Context::MemoryTest < Alchemystai::Test:
   def test_add_required_params
     skip("Prism tests are disabled")
 
-    response =
-      @alchemyst_ai.v1.context.memory.add(
-        contents: [
-          {content: "Customer asked about pricing for the Scale plan.", metadata: {messageId: "msg-1"}},
-          {
-            content: "Explained the Scale plan pricing and shared the pricing page link.",
-            metadata: {messageId: "msg-2"}
-          }
-        ],
-        memory_id: "support-thread-TCK-1234"
-      )
+    response = @alchemyst_ai.v1.context.memory.add(contents: [{}, {}], memory_id: "support-thread-TCK-1234")
 
     assert_pattern do
       response => Alchemystai::Models::V1::Context::MemoryAddResponse
