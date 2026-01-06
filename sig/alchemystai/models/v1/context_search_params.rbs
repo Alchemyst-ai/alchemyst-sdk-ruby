@@ -74,13 +74,10 @@ module Alchemystai
           request_options: Alchemystai::RequestOptions
         }
 
-        type metadata = :true | :false
+        type metadata = nil
 
         module Metadata
           extend Alchemystai::Internal::Type::Enum
-
-          TRUE: :true
-          FALSE: :false
 
           def self?.values: -> ::Array[Alchemystai::Models::V1::ContextSearchParams::metadata]
         end

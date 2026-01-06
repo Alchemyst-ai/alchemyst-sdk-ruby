@@ -61,11 +61,13 @@ module Alchemystai
 
           # This endpoint adds memory context data, fetching chat history if needed.
           #
-          # @overload add(contents:, memory_id:, request_options: {})
+          # @overload add(contents:, memory_id:, metadata: nil, request_options: {})
           #
-          # @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects with additional properties allowed
+          # @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects with metadata
           #
           # @param memory_id [String] The ID of the memory
+          #
+          # @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata with groupName defaulting to ["default"]
           #
           # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
           #

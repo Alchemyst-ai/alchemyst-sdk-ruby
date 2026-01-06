@@ -170,17 +170,6 @@ module Alchemystai
             end
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          TRUE =
-            T.let(
-              :true,
-              Alchemystai::V1::ContextSearchParams::Metadata::TaggedSymbol
-            )
-          FALSE =
-            T.let(
-              :false,
-              Alchemystai::V1::ContextSearchParams::Metadata::TaggedSymbol
-            )
-
           sig do
             override.returns(
               T::Array[
