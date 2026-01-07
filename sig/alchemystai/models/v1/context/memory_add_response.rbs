@@ -1,0 +1,32 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type memory_add_response =
+          { context_id: String, success: bool, processed_documents: Float }
+
+        class MemoryAddResponse < Alchemystai::Internal::Type::BaseModel
+          attr_accessor context_id: String
+
+          attr_accessor success: bool
+
+          attr_reader processed_documents: Float?
+
+          def processed_documents=: (Float) -> Float
+
+          def initialize: (
+            context_id: String,
+            success: bool,
+            ?processed_documents: Float
+          ) -> void
+
+          def to_hash: -> {
+            context_id: String,
+            success: bool,
+            processed_documents: Float
+          }
+        end
+      end
+    end
+  end
+end

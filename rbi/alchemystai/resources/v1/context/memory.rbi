@@ -51,6 +51,31 @@ module Alchemystai
           )
           end
 
+          # This endpoint adds memory (chat history) as context.
+          sig do
+            params(
+              contents:
+                T::Array[
+                  Alchemystai::V1::Context::MemoryAddParams::Content::OrHash
+                ],
+              memory_id: String,
+              metadata:
+                Alchemystai::V1::Context::MemoryAddParams::Metadata::OrHash,
+              request_options: Alchemystai::RequestOptions::OrHash
+            ).returns(Alchemystai::Models::V1::Context::MemoryAddResponse)
+          end
+          def add(
+            # Array of content objects. Each object must contain at least the 'content' field.
+            # Additional properties are allowed.
+            contents:,
+            # The ID of the memory
+            memory_id:,
+            # Optional metadata for the memory context. Defaults to ["default"]
+            metadata: nil,
+            request_options: {}
+          )
+          end
+
           # @api private
           sig { params(client: Alchemystai::Client).returns(T.attached_class) }
           def self.new(client:)
