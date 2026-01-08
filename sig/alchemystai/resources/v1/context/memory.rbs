@@ -20,7 +20,7 @@ module Alchemystai
 
           def add: (
             contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
-            memory_id: String,
+            session_id: String,
             ?metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
             ?request_options: Alchemystai::request_opts
           ) -> Alchemystai::Models::V1::Context::MemoryAddResponse

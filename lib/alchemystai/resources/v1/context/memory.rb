@@ -64,13 +64,13 @@ module Alchemystai
           #
           # This endpoint adds memory (chat history) as context.
           #
-          # @overload add(contents:, memory_id:, metadata: nil, request_options: {})
+          # @overload add(contents:, session_id:, metadata: nil, request_options: {})
           #
           # @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects. Each object must contain at least the 'content' field.
           #
-          # @param memory_id [String] The ID of the memory
+          # @param session_id [String] The ID of the session
           #
-          # @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata for the memory context. Defaults to ["default"]
+          # @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata for the memory context. Defaults to ["default"] if not provide
           #
           # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
           #
