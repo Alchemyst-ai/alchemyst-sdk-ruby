@@ -1,0 +1,136 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type add_async_create_params =
+          {
+            context_type: Alchemystai::Models::V1::Context::AddAsyncCreateParams::context_type,
+            documents: ::Array[Alchemystai::V1::Context::AddAsyncCreateParams::Document],
+            scope: Alchemystai::Models::V1::Context::AddAsyncCreateParams::scope,
+            source: String,
+            metadata: Alchemystai::V1::Context::AddAsyncCreateParams::Metadata
+          }
+          & Alchemystai::Internal::Type::request_parameters
+
+        class AddAsyncCreateParams < Alchemystai::Internal::Type::BaseModel
+          extend Alchemystai::Internal::Type::RequestParameters::Converter
+          include Alchemystai::Internal::Type::RequestParameters
+
+          attr_accessor context_type: Alchemystai::Models::V1::Context::AddAsyncCreateParams::context_type
+
+          attr_accessor documents: ::Array[Alchemystai::V1::Context::AddAsyncCreateParams::Document]
+
+          attr_accessor scope: Alchemystai::Models::V1::Context::AddAsyncCreateParams::scope
+
+          attr_accessor source: String
+
+          attr_reader metadata: Alchemystai::V1::Context::AddAsyncCreateParams::Metadata?
+
+          def metadata=: (
+            Alchemystai::V1::Context::AddAsyncCreateParams::Metadata
+          ) -> Alchemystai::V1::Context::AddAsyncCreateParams::Metadata
+
+          def initialize: (
+            context_type: Alchemystai::Models::V1::Context::AddAsyncCreateParams::context_type,
+            documents: ::Array[Alchemystai::V1::Context::AddAsyncCreateParams::Document],
+            scope: Alchemystai::Models::V1::Context::AddAsyncCreateParams::scope,
+            source: String,
+            ?metadata: Alchemystai::V1::Context::AddAsyncCreateParams::Metadata,
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            context_type: Alchemystai::Models::V1::Context::AddAsyncCreateParams::context_type,
+            documents: ::Array[Alchemystai::V1::Context::AddAsyncCreateParams::Document],
+            scope: Alchemystai::Models::V1::Context::AddAsyncCreateParams::scope,
+            source: String,
+            metadata: Alchemystai::V1::Context::AddAsyncCreateParams::Metadata,
+            request_options: Alchemystai::RequestOptions
+          }
+
+          type context_type = :resource | :conversation | :instruction
+
+          module ContextType
+            extend Alchemystai::Internal::Type::Enum
+
+            RESOURCE: :resource
+            CONVERSATION: :conversation
+            INSTRUCTION: :instruction
+
+            def self?.values: -> ::Array[Alchemystai::Models::V1::Context::AddAsyncCreateParams::context_type]
+          end
+
+          type document = { content: String }
+
+          class Document < Alchemystai::Internal::Type::BaseModel
+            attr_reader content: String?
+
+            def content=: (String) -> String
+
+            def initialize: (?content: String) -> void
+
+            def to_hash: -> { content: String }
+          end
+
+          type scope = :internal | :external
+
+          module Scope
+            extend Alchemystai::Internal::Type::Enum
+
+            INTERNAL: :internal
+            EXTERNAL: :external
+
+            def self?.values: -> ::Array[Alchemystai::Models::V1::Context::AddAsyncCreateParams::scope]
+          end
+
+          type metadata =
+            {
+              file_name: String,
+              file_size: Float,
+              file_type: String,
+              group_name: ::Array[String],
+              last_modified: String
+            }
+
+          class Metadata < Alchemystai::Internal::Type::BaseModel
+            attr_reader file_name: String?
+
+            def file_name=: (String) -> String
+
+            attr_reader file_size: Float?
+
+            def file_size=: (Float) -> Float
+
+            attr_reader file_type: String?
+
+            def file_type=: (String) -> String
+
+            attr_reader group_name: ::Array[String]?
+
+            def group_name=: (::Array[String]) -> ::Array[String]
+
+            attr_reader last_modified: String?
+
+            def last_modified=: (String) -> String
+
+            def initialize: (
+              ?file_name: String,
+              ?file_size: Float,
+              ?file_type: String,
+              ?group_name: ::Array[String],
+              ?last_modified: String
+            ) -> void
+
+            def to_hash: -> {
+              file_name: String,
+              file_size: Float,
+              file_type: String,
+              group_name: ::Array[String],
+              last_modified: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

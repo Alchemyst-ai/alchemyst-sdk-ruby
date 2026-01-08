@@ -1,0 +1,19 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type add_async_create_response = { job_id: String, queued: bool }
+
+        class AddAsyncCreateResponse < Alchemystai::Internal::Type::BaseModel
+          attr_accessor job_id: String
+
+          attr_accessor queued: bool
+
+          def initialize: (job_id: String, queued: bool) -> void
+
+          def to_hash: -> { job_id: String, queued: bool }
+        end
+      end
+    end
+  end
+end

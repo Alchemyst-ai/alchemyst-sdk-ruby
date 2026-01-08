@@ -1,0 +1,23 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        module AddAsync
+          type status_retrieve_params =
+            {  } & Alchemystai::Internal::Type::request_parameters
+
+          class StatusRetrieveParams < Alchemystai::Internal::Type::BaseModel
+            extend Alchemystai::Internal::Type::RequestParameters::Converter
+            include Alchemystai::Internal::Type::RequestParameters
+
+            def initialize: (
+              ?request_options: Alchemystai::request_opts
+            ) -> void
+
+            def to_hash: -> { request_options: Alchemystai::RequestOptions }
+          end
+        end
+      end
+    end
+  end
+end

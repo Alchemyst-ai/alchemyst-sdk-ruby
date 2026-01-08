@@ -13,6 +13,9 @@ module Alchemystai
         # @return [Alchemystai::Resources::V1::Context::Memory]
         attr_reader :memory
 
+        # @return [Alchemystai::Resources::V1::Context::AddAsync]
+        attr_reader :add_async
+
         # This endpoint deletes context data based on the provided parameters. It returns
         # a success or error response depending on the result from the context processor.
         #
@@ -126,6 +129,7 @@ module Alchemystai
           @traces = Alchemystai::Resources::V1::Context::Traces.new(client: client)
           @view = Alchemystai::Resources::V1::Context::View.new(client: client)
           @memory = Alchemystai::Resources::V1::Context::Memory.new(client: client)
+          @add_async = Alchemystai::Resources::V1::Context::AddAsync.new(client: client)
         end
       end
     end
