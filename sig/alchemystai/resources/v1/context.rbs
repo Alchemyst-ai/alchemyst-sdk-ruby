@@ -8,6 +8,8 @@ module Alchemystai
 
         attr_reader memory: Alchemystai::Resources::V1::Context::Memory
 
+        attr_reader add_async: Alchemystai::Resources::V1::Context::AddAsync
+
         def delete: (
           organization_id: String,
           source: String,

@@ -13,6 +13,9 @@ module Alchemystai
         sig { returns(Alchemystai::Resources::V1::Context::Memory) }
         attr_reader :memory
 
+        sig { returns(Alchemystai::Resources::V1::Context::AddAsync) }
+        attr_reader :add_async
+
         # This endpoint deletes context data based on the provided parameters. It returns
         # a success or error response depending on the result from the context processor.
         sig do

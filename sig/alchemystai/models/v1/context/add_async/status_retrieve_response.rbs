@@ -1,0 +1,71 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        module AddAsync
+          type status_retrieve_response =
+            {
+              job_id: String,
+              status: String,
+              success: bool,
+              attempts_made: Float,
+              failed_reason: String,
+              finished_on: Float,
+              processed_on: Float,
+              result: top
+            }
+
+          class StatusRetrieveResponse < Alchemystai::Internal::Type::BaseModel
+            attr_accessor job_id: String
+
+            attr_accessor status: String
+
+            attr_accessor success: bool
+
+            attr_reader attempts_made: Float?
+
+            def attempts_made=: (Float) -> Float
+
+            attr_reader failed_reason: String?
+
+            def failed_reason=: (String) -> String
+
+            attr_reader finished_on: Float?
+
+            def finished_on=: (Float) -> Float
+
+            attr_reader processed_on: Float?
+
+            def processed_on=: (Float) -> Float
+
+            attr_reader result: top?
+
+            def result=: (top) -> top
+
+            def initialize: (
+              job_id: String,
+              status: String,
+              success: bool,
+              ?attempts_made: Float,
+              ?failed_reason: String,
+              ?finished_on: Float,
+              ?processed_on: Float,
+              ?result: top
+            ) -> void
+
+            def to_hash: -> {
+              job_id: String,
+              status: String,
+              success: bool,
+              attempts_made: Float,
+              failed_reason: String,
+              finished_on: Float,
+              processed_on: Float,
+              result: top
+            }
+          end
+        end
+      end
+    end
+  end
+end

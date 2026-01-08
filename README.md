@@ -8,7 +8,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/alchemystai).
 
-The REST API documentation can be found on [docs.getalchemystai.com](https://docs.getalchemystai.com).
+The REST API documentation can be found on [getalchemystai.com](https://getalchemystai.com/docs).
 
 ## Installation
 
