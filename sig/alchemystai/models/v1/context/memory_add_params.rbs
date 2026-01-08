@@ -1,0 +1,94 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        type memory_add_params =
+          {
+            contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
+            session_id: String,
+            metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata
+          }
+          & Alchemystai::Internal::Type::request_parameters
+
+        class MemoryAddParams < Alchemystai::Internal::Type::BaseModel
+          extend Alchemystai::Internal::Type::RequestParameters::Converter
+          include Alchemystai::Internal::Type::RequestParameters
+
+          attr_accessor contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content]
+
+          attr_accessor session_id: String
+
+          attr_reader metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata?
+
+          def metadata=: (
+            Alchemystai::V1::Context::MemoryAddParams::Metadata
+          ) -> Alchemystai::V1::Context::MemoryAddParams::Metadata
+
+          def initialize: (
+            contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
+            session_id: String,
+            ?metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
+            ?request_options: Alchemystai::request_opts
+          ) -> void
+
+          def to_hash: -> {
+            contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
+            session_id: String,
+            metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
+            request_options: Alchemystai::RequestOptions
+          }
+
+          type content =
+            {
+              content: String,
+              metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+            }
+
+          class Content < Alchemystai::Internal::Type::BaseModel
+            attr_accessor content: String
+
+            attr_reader metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata?
+
+            def metadata=: (
+              Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+            ) -> Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+
+            def initialize: (
+              content: String,
+              ?metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+            ) -> void
+
+            def to_hash: -> {
+              content: String,
+              metadata: Alchemystai::V1::Context::MemoryAddParams::Content::Metadata
+            }
+
+            type metadata = { message_id: String }
+
+            class Metadata < Alchemystai::Internal::Type::BaseModel
+              attr_reader message_id: String?
+
+              def message_id=: (String) -> String
+
+              def initialize: (?message_id: String) -> void
+
+              def to_hash: -> { message_id: String }
+            end
+          end
+
+          type metadata = { group_name: ::Array[String] }
+
+          class Metadata < Alchemystai::Internal::Type::BaseModel
+            attr_reader group_name: ::Array[String]?
+
+            def group_name=: (::Array[String]) -> ::Array[String]
+
+            def initialize: (?group_name: ::Array[String]) -> void
+
+            def to_hash: -> { group_name: ::Array[String] }
+          end
+        end
+      end
+    end
+  end
+end

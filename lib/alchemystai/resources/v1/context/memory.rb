@@ -59,6 +59,35 @@ module Alchemystai
             )
           end
 
+          # Some parameter documentations has been truncated, see
+          # {Alchemystai::Models::V1::Context::MemoryAddParams} for more details.
+          #
+          # This endpoint adds memory (chat history) as context.
+          #
+          # @overload add(contents:, session_id:, metadata: nil, request_options: {})
+          #
+          # @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects. Each object must contain at least the 'content' field.
+          #
+          # @param session_id [String] The ID of the session
+          #
+          # @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata for the memory context. Defaults to ["default"] if not provide
+          #
+          # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
+          #
+          # @return [Alchemystai::Models::V1::Context::MemoryAddResponse]
+          #
+          # @see Alchemystai::Models::V1::Context::MemoryAddParams
+          def add(params)
+            parsed, options = Alchemystai::V1::Context::MemoryAddParams.dump_request(params)
+            @client.request(
+              method: :post,
+              path: "api/v1/context/memory/add",
+              body: parsed,
+              model: Alchemystai::Models::V1::Context::MemoryAddResponse,
+              options: options
+            )
+          end
+
           # @api private
           #
           # @param client [Alchemystai::Client]
