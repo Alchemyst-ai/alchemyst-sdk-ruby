@@ -17,27 +17,28 @@ module Alchemystai
           required :contents,
                    -> { Alchemystai::Internal::Type::ArrayOf[Alchemystai::V1::Context::MemoryAddParams::Content] }
 
-          # @!attribute memory_id
-          #   The ID of the memory
+          # @!attribute session_id
+          #   The ID of the session
           #
           #   @return [String]
-          required :memory_id, String, api_name: :memoryId
+          required :session_id, String, api_name: :sessionId
 
           # @!attribute metadata
-          #   Optional metadata for the memory context. Defaults to ["default"]
+          #   Optional metadata for the memory context. Defaults to ["default"] if not
+          #   provided.
           #
           #   @return [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata, nil]
           optional :metadata, -> { Alchemystai::V1::Context::MemoryAddParams::Metadata }
 
-          # @!method initialize(contents:, memory_id:, metadata: nil, request_options: {})
+          # @!method initialize(contents:, session_id:, metadata: nil, request_options: {})
           #   Some parameter documentations has been truncated, see
           #   {Alchemystai::Models::V1::Context::MemoryAddParams} for more details.
           #
           #   @param contents [Array<Alchemystai::Models::V1::Context::MemoryAddParams::Content>] Array of content objects. Each object must contain at least the 'content' field.
           #
-          #   @param memory_id [String] The ID of the memory
+          #   @param session_id [String] The ID of the session
           #
-          #   @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata for the memory context. Defaults to ["default"]
+          #   @param metadata [Alchemystai::Models::V1::Context::MemoryAddParams::Metadata] Optional metadata for the memory context. Defaults to ["default"] if not provide
           #
           #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
 
@@ -86,7 +87,8 @@ module Alchemystai
             #   Some parameter documentations has been truncated, see
             #   {Alchemystai::Models::V1::Context::MemoryAddParams::Metadata} for more details.
             #
-            #   Optional metadata for the memory context. Defaults to ["default"]
+            #   Optional metadata for the memory context. Defaults to ["default"] if not
+            #   provided.
             #
             #   @param group_name [Array<String>] Optional group names for the memory context. Defaults to ["default"] if not prov
           end

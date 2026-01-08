@@ -42,7 +42,7 @@ class Alchemystai::Test::Resources::V1::Context::MemoryTest < Alchemystai::Test:
     response =
       @alchemyst_ai.v1.context.memory.add(
         contents: [{content: "Customer asked about pricing for the Scale plan."}],
-        memory_id: "support-thread-TCK-1234"
+        session_id: "support-thread-TCK-1234"
       )
 
     assert_pattern do

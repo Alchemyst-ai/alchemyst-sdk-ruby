@@ -25,11 +25,12 @@ module Alchemystai
           end
           attr_accessor :contents
 
-          # The ID of the memory
+          # The ID of the session
           sig { returns(String) }
-          attr_accessor :memory_id
+          attr_accessor :session_id
 
-          # Optional metadata for the memory context. Defaults to ["default"]
+          # Optional metadata for the memory context. Defaults to ["default"] if not
+          # provided.
           sig do
             returns(
               T.nilable(Alchemystai::V1::Context::MemoryAddParams::Metadata)
@@ -51,7 +52,7 @@ module Alchemystai
                 T::Array[
                   Alchemystai::V1::Context::MemoryAddParams::Content::OrHash
                 ],
-              memory_id: String,
+              session_id: String,
               metadata:
                 Alchemystai::V1::Context::MemoryAddParams::Metadata::OrHash,
               request_options: Alchemystai::RequestOptions::OrHash
@@ -61,9 +62,10 @@ module Alchemystai
             # Array of content objects. Each object must contain at least the 'content' field.
             # Additional properties are allowed.
             contents:,
-            # The ID of the memory
-            memory_id:,
-            # Optional metadata for the memory context. Defaults to ["default"]
+            # The ID of the session
+            session_id:,
+            # Optional metadata for the memory context. Defaults to ["default"] if not
+            # provided.
             metadata: nil,
             request_options: {}
           )
@@ -74,7 +76,7 @@ module Alchemystai
               {
                 contents:
                   T::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
-                memory_id: String,
+                session_id: String,
                 metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
                 request_options: Alchemystai::RequestOptions
               }
@@ -188,7 +190,8 @@ module Alchemystai
             sig { params(group_name: T::Array[String]).void }
             attr_writer :group_name
 
-            # Optional metadata for the memory context. Defaults to ["default"]
+            # Optional metadata for the memory context. Defaults to ["default"] if not
+            # provided.
             sig do
               params(group_name: T::Array[String]).returns(T.attached_class)
             end
