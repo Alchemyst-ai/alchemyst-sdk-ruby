@@ -18,6 +18,13 @@ module Alchemystai
             ?request_options: Alchemystai::request_opts
           ) -> nil
 
+          def add: (
+            contents: ::Array[Alchemystai::V1::Context::MemoryAddParams::Content],
+            session_id: String,
+            ?metadata: Alchemystai::V1::Context::MemoryAddParams::Metadata,
+            ?request_options: Alchemystai::request_opts
+          ) -> Alchemystai::Models::V1::Context::MemoryAddResponse
+
           def initialize: (client: Alchemystai::Client) -> void
         end
       end

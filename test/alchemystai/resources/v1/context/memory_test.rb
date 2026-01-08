@@ -35,4 +35,26 @@ class Alchemystai::Test::Resources::V1::Context::MemoryTest < Alchemystai::Test:
       response => nil
     end
   end
+
+  def test_add_required_params
+    skip("Prism tests are disabled")
+
+    response =
+      @alchemyst_ai.v1.context.memory.add(
+        contents: [{content: "Customer asked about pricing for the Scale plan."}],
+        session_id: "support-thread-TCK-1234"
+      )
+
+    assert_pattern do
+      response => Alchemystai::Models::V1::Context::MemoryAddResponse
+    end
+
+    assert_pattern do
+      response => {
+        context_id: String,
+        success: Alchemystai::Internal::Type::Boolean,
+        processed_documents: Float | nil
+      }
+    end
+  end
 end
