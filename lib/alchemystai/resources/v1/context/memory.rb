@@ -7,11 +7,11 @@ module Alchemystai
         class Memory
           # This endpoint updates memory context data.
           #
-          # @overload update(contents:, memory_id:, request_options: {})
+          # @overload update(contents:, session_id:, request_options: {})
           #
           # @param contents [Array<Alchemystai::Models::V1::Context::MemoryUpdateParams::Content>] Array of updated content objects
           #
-          # @param memory_id [String] The ID of the memory to update
+          # @param session_id [String] The ID of the memory to update
           #
           # @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}, nil]
           #

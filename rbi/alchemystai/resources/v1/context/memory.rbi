@@ -12,7 +12,7 @@ module Alchemystai
                 T::Array[
                   Alchemystai::V1::Context::MemoryUpdateParams::Content::OrHash
                 ],
-              memory_id: String,
+              session_id: String,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(Alchemystai::Models::V1::Context::MemoryUpdateResponse)
           end
@@ -20,7 +20,7 @@ module Alchemystai
             # Array of updated content objects
             contents:,
             # The ID of the memory to update
-            memory_id:,
+            session_id:,
             request_options: {}
           )
           end

@@ -5,7 +5,7 @@ module Alchemystai
         class Memory
           def update: (
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String,
+            session_id: String,
             ?request_options: Alchemystai::request_opts
           ) -> Alchemystai::Models::V1::Context::MemoryUpdateResponse
 
