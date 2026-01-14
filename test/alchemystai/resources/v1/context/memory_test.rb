@@ -7,7 +7,7 @@ class Alchemystai::Test::Resources::V1::Context::MemoryTest < Alchemystai::Test:
     skip("Prism tests are disabled")
 
     response =
-      @alchemyst_ai.v1.context.memory.update(contents: [{}, {}], memory_id: "support-thread-TCK-1234")
+      @alchemyst_ai.v1.context.memory.update(contents: [{}, {}], session_id: "support-thread-TCK-1234")
 
     assert_pattern do
       response => Alchemystai::Models::V1::Context::MemoryUpdateResponse

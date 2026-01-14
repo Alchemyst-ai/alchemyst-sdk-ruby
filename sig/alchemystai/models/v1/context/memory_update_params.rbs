@@ -5,7 +5,7 @@ module Alchemystai
         type memory_update_params =
           {
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String
+            session_id: String
           }
           & Alchemystai::Internal::Type::request_parameters
 
@@ -15,17 +15,17 @@ module Alchemystai
 
           attr_accessor contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
 
-          attr_accessor memory_id: String
+          attr_accessor session_id: String
 
           def initialize: (
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String,
+            session_id: String,
             ?request_options: Alchemystai::request_opts
           ) -> void
 
           def to_hash: -> {
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String,
+            session_id: String,
             request_options: Alchemystai::RequestOptions
           }
 
