@@ -19,29 +19,14 @@ module Alchemystai
           # Array of updated content objects
           sig do
             returns(
-              T.nilable(
-                T::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
-              )
+              T::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
             )
           end
-          attr_reader :contents
-
-          sig do
-            params(
-              contents:
-                T::Array[
-                  Alchemystai::V1::Context::MemoryUpdateParams::Content::OrHash
-                ]
-            ).void
-          end
-          attr_writer :contents
+          attr_accessor :contents
 
           # The ID of the memory to update
-          sig { returns(T.nilable(String)) }
-          attr_reader :memory_id
-
-          sig { params(memory_id: String).void }
-          attr_writer :memory_id
+          sig { returns(String) }
+          attr_accessor :session_id
 
           sig do
             params(
@@ -49,15 +34,15 @@ module Alchemystai
                 T::Array[
                   Alchemystai::V1::Context::MemoryUpdateParams::Content::OrHash
                 ],
-              memory_id: String,
+              session_id: String,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
             # Array of updated content objects
-            contents: nil,
+            contents:,
             # The ID of the memory to update
-            memory_id: nil,
+            session_id:,
             request_options: {}
           )
           end
@@ -69,7 +54,7 @@ module Alchemystai
                   T::Array[
                     Alchemystai::V1::Context::MemoryUpdateParams::Content
                   ],
-                memory_id: String,
+                session_id: String,
                 request_options: Alchemystai::RequestOptions
               }
             )
@@ -86,17 +71,75 @@ module Alchemystai
                 )
               end
 
+            # Unique ID for the message
+            sig { returns(T.nilable(String)) }
+            attr_reader :id
+
+            sig { params(id: String).void }
+            attr_writer :id
+
+            # The content of the memory entry
             sig { returns(T.nilable(String)) }
             attr_reader :content
 
             sig { params(content: String).void }
             attr_writer :content
 
-            sig { params(content: String).returns(T.attached_class) }
-            def self.new(content: nil)
+            # Creation timestamp
+            sig { returns(T.nilable(String)) }
+            attr_reader :created_at
+
+            sig { params(created_at: String).void }
+            attr_writer :created_at
+
+            # Additional metadata for the memory entry
+            sig { returns(T.nilable(T::Hash[Symbol, T.anything])) }
+            attr_reader :metadata
+
+            sig { params(metadata: T::Hash[Symbol, T.anything]).void }
+            attr_writer :metadata
+
+            # Role of the message (e.g., user, assistant)
+            sig { returns(T.nilable(String)) }
+            attr_reader :role
+
+            sig { params(role: String).void }
+            attr_writer :role
+
+            sig do
+              params(
+                id: String,
+                content: String,
+                created_at: String,
+                metadata: T::Hash[Symbol, T.anything],
+                role: String
+              ).returns(T.attached_class)
+            end
+            def self.new(
+              # Unique ID for the message
+              id: nil,
+              # The content of the memory entry
+              content: nil,
+              # Creation timestamp
+              created_at: nil,
+              # Additional metadata for the memory entry
+              metadata: nil,
+              # Role of the message (e.g., user, assistant)
+              role: nil
+            )
             end
 
-            sig { override.returns({ content: String }) }
+            sig do
+              override.returns(
+                {
+                  id: String,
+                  content: String,
+                  created_at: String,
+                  metadata: T::Hash[Symbol, T.anything],
+                  role: String
+                }
+              )
+            end
             def to_hash
             end
           end

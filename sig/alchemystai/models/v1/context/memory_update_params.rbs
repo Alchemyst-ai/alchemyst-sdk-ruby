@@ -5,7 +5,7 @@ module Alchemystai
         type memory_update_params =
           {
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String
+            session_id: String
           }
           & Alchemystai::Internal::Type::request_parameters
 
@@ -13,38 +13,67 @@ module Alchemystai
           extend Alchemystai::Internal::Type::RequestParameters::Converter
           include Alchemystai::Internal::Type::RequestParameters
 
-          attr_reader contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]?
+          attr_accessor contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
 
-          def contents=: (
-            ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
-          ) -> ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content]
-
-          attr_reader memory_id: String?
-
-          def memory_id=: (String) -> String
+          attr_accessor session_id: String
 
           def initialize: (
-            ?contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            ?memory_id: String,
+            contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
+            session_id: String,
             ?request_options: Alchemystai::request_opts
           ) -> void
 
           def to_hash: -> {
             contents: ::Array[Alchemystai::V1::Context::MemoryUpdateParams::Content],
-            memory_id: String,
+            session_id: String,
             request_options: Alchemystai::RequestOptions
           }
 
-          type content = { content: String }
+          type content =
+            {
+              id: String,
+              content: String,
+              created_at: String,
+              metadata: ::Hash[Symbol, top],
+              role: String
+            }
 
           class Content < Alchemystai::Internal::Type::BaseModel
+            attr_reader id: String?
+
+            def id=: (String) -> String
+
             attr_reader content: String?
 
             def content=: (String) -> String
 
-            def initialize: (?content: String) -> void
+            attr_reader created_at: String?
 
-            def to_hash: -> { content: String }
+            def created_at=: (String) -> String
+
+            attr_reader metadata: ::Hash[Symbol, top]?
+
+            def metadata=: (::Hash[Symbol, top]) -> ::Hash[Symbol, top]
+
+            attr_reader role: String?
+
+            def role=: (String) -> String
+
+            def initialize: (
+              ?id: String,
+              ?content: String,
+              ?created_at: String,
+              ?metadata: ::Hash[Symbol, top],
+              ?role: String
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              content: String,
+              created_at: String,
+              metadata: ::Hash[Symbol, top],
+              role: String
+            }
           end
         end
       end

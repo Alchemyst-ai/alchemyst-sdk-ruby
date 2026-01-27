@@ -8,29 +8,33 @@ module Alchemystai
 
         attr_reader memory: Alchemystai::Resources::V1::Context::Memory
 
+        attr_reader add_async: Alchemystai::Resources::V1::Context::AddAsync
+
         def delete: (
+          organization_id: String,
+          source: String,
           ?by_doc: bool?,
           ?by_id: bool?,
-          ?organization_id: String?,
-          ?source: String,
           ?user_id: String?,
           ?request_options: Alchemystai::request_opts
         ) -> top
 
         def add: (
-          ?context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
-          ?documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
+          context_type: Alchemystai::Models::V1::ContextAddParams::context_type,
+          documents: ::Array[Alchemystai::V1::ContextAddParams::Document],
+          scope: Alchemystai::Models::V1::ContextAddParams::scope,
+          source: String,
           ?metadata: Alchemystai::V1::ContextAddParams::Metadata,
-          ?scope: Alchemystai::Models::V1::ContextAddParams::scope,
-          ?source: String,
           ?request_options: Alchemystai::request_opts
-        ) -> top
+        ) -> Alchemystai::Models::V1::ContextAddResponse
 
         def search: (
           minimum_similarity_threshold: Float,
           query: String,
           similarity_threshold: Float,
-          ?metadata: top,
+          ?metadata: Alchemystai::Models::V1::ContextSearchParams::metadata,
+          ?mode: Alchemystai::Models::V1::ContextSearchParams::mode,
+          ?body_metadata: top,
           ?scope: Alchemystai::Models::V1::ContextSearchParams::scope,
           ?user_id: String,
           ?request_options: Alchemystai::request_opts

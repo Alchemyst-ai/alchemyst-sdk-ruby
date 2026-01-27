@@ -2,16 +2,112 @@ module Alchemystai
   module Models
     module V1
       module Context
-        type trace_delete_response = { trace: top }
+        type trace_delete_response =
+          {
+            trace: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace
+          }
 
         class TraceDeleteResponse < Alchemystai::Internal::Type::BaseModel
-          attr_reader trace: top?
+          attr_accessor trace: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace
 
-          def trace=: (top) -> top
+          def initialize: (
+            trace: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace
+          ) -> void
 
-          def initialize: (?trace: top) -> void
+          def to_hash: -> {
+            trace: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace
+          }
 
-          def to_hash: -> { trace: top }
+          type trace =
+            {
+              _id: String,
+              created_at: Time,
+              data: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data,
+              organization_id: String,
+              type: String,
+              updated_at: Time,
+              user_id: String
+            }
+
+          class Trace < Alchemystai::Internal::Type::BaseModel
+            attr_reader _id: String?
+
+            def _id=: (String) -> String
+
+            attr_reader created_at: Time?
+
+            def created_at=: (Time) -> Time
+
+            attr_reader data: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data?
+
+            def data=: (
+              Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data
+            ) -> Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data
+
+            attr_reader organization_id: String?
+
+            def organization_id=: (String) -> String
+
+            attr_reader type: String?
+
+            def type=: (String) -> String
+
+            attr_reader updated_at: Time?
+
+            def updated_at=: (Time) -> Time
+
+            attr_reader user_id: String?
+
+            def user_id=: (String) -> String
+
+            def initialize: (
+              ?_id: String,
+              ?created_at: Time,
+              ?data: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data,
+              ?organization_id: String,
+              ?type: String,
+              ?updated_at: Time,
+              ?user_id: String
+            ) -> void
+
+            def to_hash: -> {
+              _id: String,
+              created_at: Time,
+              data: Alchemystai::Models::V1::Context::TraceDeleteResponse::Trace::Data,
+              organization_id: String,
+              type: String,
+              updated_at: Time,
+              user_id: String
+            }
+
+            type data = { file_name: String, query: String, source: String }
+
+            class Data < Alchemystai::Internal::Type::BaseModel
+              attr_reader file_name: String?
+
+              def file_name=: (String) -> String
+
+              attr_reader query: String?
+
+              def query=: (String) -> String
+
+              attr_reader source: String?
+
+              def source=: (String) -> String
+
+              def initialize: (
+                ?file_name: String,
+                ?query: String,
+                ?source: String
+              ) -> void
+
+              def to_hash: -> {
+                file_name: String,
+                query: String,
+                source: String
+              }
+            end
+          end
         end
       end
     end

@@ -1,6 +1,6 @@
 # Alchemyst AI Ruby API library
 
-The Alchemyst AI Ruby library provides convenient access to the Alchemyst AI REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/stainless-sdks/alchemyst-ai-sdk-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
+The Alchemyst AI Ruby library provides convenient access to the Alchemyst AI REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/Alchemyst-ai/alchemyst-sdk-ruby#Sorbet) for usage with Sorbet. The standard library's `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -8,15 +8,19 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/alchemystai).
 
-The REST API documentation can be found on [docs.getalchemystai.com](https://docs.getalchemystai.com).
+The REST API documentation can be found on [getalchemystai.com](https://getalchemystai.com/docs).
 
 ## Installation
 
 To use this gem, install via Bundler by adding the following to your application's `Gemfile`:
 
+<!-- x-release-please-start-version -->
+
 ```ruby
-gem "alchemystai", "~> 0.0.1"
+gem "alchemystai", "~> 0.1.0"
 ```
+
+<!-- x-release-please-end -->
 
 ## Usage
 
@@ -31,12 +35,12 @@ alchemyst_ai = Alchemystai::Client.new(
 response = alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
-  source: "platform.api.context.add"
+  source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
 )
 
-puts(response)
+puts(response.context_id)
 ```
 
 ### Handling errors
@@ -48,9 +52,9 @@ begin
   context = alchemyst_ai.v1.context.add(
     context_type: "resource",
     documents: [{content: "The content of the document"}],
-    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     scope: "internal",
-    source: "platform.api.context.add"
+    source: "platform.api.context.add",
+    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
   )
 rescue Alchemystai::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -97,9 +101,9 @@ alchemyst_ai = Alchemystai::Client.new(
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
   source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   request_options: {max_retries: 5}
 )
 ```
@@ -118,9 +122,9 @@ alchemyst_ai = Alchemystai::Client.new(
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
   source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   request_options: {timeout: 5}
 )
 ```
@@ -156,9 +160,9 @@ response =
   alchemyst_ai.v1.context.add(
     context_type: "resource",
     documents: [{content: "The content of the document"}],
-    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     scope: "internal",
     source: "platform.api.context.add",
+    metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -207,14 +211,14 @@ You can provide typesafe request parameters like so:
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  scope: "internal",
+  source: "platform.api.context.add",
   metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
     file_size: 1024
-  ),
-  scope: "internal",
-  source: "platform.api.context.add"
+  )
 )
 ```
 
@@ -225,23 +229,23 @@ Or, equivalently:
 alchemyst_ai.v1.context.add(
   context_type: "resource",
   documents: [{content: "The content of the document"}],
-  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024},
   scope: "internal",
-  source: "platform.api.context.add"
+  source: "platform.api.context.add",
+  metadata: {fileName: "notes.txt", fileType: "text/plain", lastModified: "2025-10-01T18:42:40.419Z", fileSize: 1024}
 )
 
 # You can also splat a full Params class:
 params = Alchemystai::V1::ContextAddParams.new(
   context_type: "resource",
   documents: [Alchemystai::V1::ContextAddParams::Document.new(content: "The content of the document")],
+  scope: "internal",
+  source: "platform.api.context.add",
   metadata: Alchemystai::V1::ContextAddParams::Metadata.new(
     file_name: "notes.txt",
     file_type: "text/plain",
     last_modified: "2025-10-01T18:42:40.419Z",
     file_size: 1024
-  ),
-  scope: "internal",
-  source: "platform.api.context.add"
+  )
 )
 alchemyst_ai.v1.context.add(**params)
 ```
@@ -286,4 +290,4 @@ Ruby 3.2.0 or higher.
 
 ## Contributing
 
-See [the contributing documentation](https://github.com/stainless-sdks/alchemyst-ai-sdk-ruby/tree/main/CONTRIBUTING.md).
+See [the contributing documentation](https://github.com/Alchemyst-ai/alchemyst-sdk-ruby/tree/main/CONTRIBUTING.md).

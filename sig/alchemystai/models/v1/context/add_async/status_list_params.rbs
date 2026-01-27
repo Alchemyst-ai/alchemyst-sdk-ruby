@@ -1,0 +1,63 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        module AddAsync
+          type status_list_params =
+            {
+              limit: String,
+              offset: String,
+              type: Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_
+            }
+            & Alchemystai::Internal::Type::request_parameters
+
+          class StatusListParams < Alchemystai::Internal::Type::BaseModel
+            extend Alchemystai::Internal::Type::RequestParameters::Converter
+            include Alchemystai::Internal::Type::RequestParameters
+
+            attr_reader limit: String?
+
+            def limit=: (String) -> String
+
+            attr_reader offset: String?
+
+            def offset=: (String) -> String
+
+            attr_reader type: Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_?
+
+            def type=: (
+              Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_
+            ) -> Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_
+
+            def initialize: (
+              ?limit: String,
+              ?offset: String,
+              ?type: Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_,
+              ?request_options: Alchemystai::request_opts
+            ) -> void
+
+            def to_hash: -> {
+              limit: String,
+              offset: String,
+              type: Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_,
+              request_options: Alchemystai::RequestOptions
+            }
+
+            type type_ = :all | :active | :failed | :completed
+
+            module Type
+              extend Alchemystai::Internal::Type::Enum
+
+              ALL: :all
+              ACTIVE: :active
+              FAILED: :failed
+              COMPLETED: :completed
+
+              def self?.values: -> ::Array[Alchemystai::Models::V1::Context::AddAsync::StatusListParams::type_]
+            end
+          end
+        end
+      end
+    end
+  end
+end

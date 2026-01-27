@@ -16,16 +16,33 @@ module Alchemystai
               )
             end
 
+          # Optional magic key for special access or filtering
+          sig { returns(T.nilable(String)) }
+          attr_reader :magic_key
+
+          sig { params(magic_key: String).void }
+          attr_writer :magic_key
+
           sig do
             params(
+              magic_key: String,
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
-          def self.new(request_options: {})
+          def self.new(
+            # Optional magic key for special access or filtering
+            magic_key: nil,
+            request_options: {}
+          )
           end
 
           sig do
-            override.returns({ request_options: Alchemystai::RequestOptions })
+            override.returns(
+              {
+                magic_key: String,
+                request_options: Alchemystai::RequestOptions
+              }
+            )
           end
           def to_hash
           end

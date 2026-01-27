@@ -3,7 +3,12 @@
 module Alchemystai
   module Test
     module Resources
+      module AddAsync
+      end
+
       module Context
+        module AddAsync
+        end
       end
 
       module Org
@@ -11,6 +16,8 @@ module Alchemystai
 
       module V1
         module Context
+          module AddAsync
+          end
         end
 
         module Org

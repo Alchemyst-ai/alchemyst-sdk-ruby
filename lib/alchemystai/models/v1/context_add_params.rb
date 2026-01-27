@@ -11,15 +11,27 @@ module Alchemystai
         # @!attribute context_type
         #   Type of context being added
         #
-        #   @return [Symbol, Alchemystai::Models::V1::ContextAddParams::ContextType, nil]
-        optional :context_type, enum: -> { Alchemystai::V1::ContextAddParams::ContextType }
+        #   @return [Symbol, Alchemystai::Models::V1::ContextAddParams::ContextType]
+        required :context_type, enum: -> { Alchemystai::V1::ContextAddParams::ContextType }
 
         # @!attribute documents
         #   Array of documents with content and additional metadata
         #
-        #   @return [Array<Alchemystai::Models::V1::ContextAddParams::Document>, nil]
-        optional :documents,
+        #   @return [Array<Alchemystai::Models::V1::ContextAddParams::Document>]
+        required :documents,
                  -> { Alchemystai::Internal::Type::ArrayOf[Alchemystai::V1::ContextAddParams::Document] }
+
+        # @!attribute scope
+        #   Scope of the context
+        #
+        #   @return [Symbol, Alchemystai::Models::V1::ContextAddParams::Scope]
+        required :scope, enum: -> { Alchemystai::V1::ContextAddParams::Scope }
+
+        # @!attribute source
+        #   The source of the context data
+        #
+        #   @return [String]
+        required :source, String
 
         # @!attribute metadata
         #   Additional metadata for the context
@@ -27,28 +39,16 @@ module Alchemystai
         #   @return [Alchemystai::Models::V1::ContextAddParams::Metadata, nil]
         optional :metadata, -> { Alchemystai::V1::ContextAddParams::Metadata }
 
-        # @!attribute scope
-        #   Scope of the context
-        #
-        #   @return [Symbol, Alchemystai::Models::V1::ContextAddParams::Scope, nil]
-        optional :scope, enum: -> { Alchemystai::V1::ContextAddParams::Scope }
-
-        # @!attribute source
-        #   The source of the context data
-        #
-        #   @return [String, nil]
-        optional :source, String
-
-        # @!method initialize(context_type: nil, documents: nil, metadata: nil, scope: nil, source: nil, request_options: {})
+        # @!method initialize(context_type:, documents:, scope:, source:, metadata: nil, request_options: {})
         #   @param context_type [Symbol, Alchemystai::Models::V1::ContextAddParams::ContextType] Type of context being added
         #
         #   @param documents [Array<Alchemystai::Models::V1::ContextAddParams::Document>] Array of documents with content and additional metadata
         #
-        #   @param metadata [Alchemystai::Models::V1::ContextAddParams::Metadata] Additional metadata for the context
-        #
         #   @param scope [Symbol, Alchemystai::Models::V1::ContextAddParams::Scope] Scope of the context
         #
         #   @param source [String] The source of the context data
+        #
+        #   @param metadata [Alchemystai::Models::V1::ContextAddParams::Metadata] Additional metadata for the context
         #
         #   @param request_options [Alchemystai::RequestOptions, Hash{Symbol=>Object}]
 
@@ -73,6 +73,17 @@ module Alchemystai
 
           # @!method initialize(content: nil)
           #   @param content [String] The content of the document
+        end
+
+        # Scope of the context
+        module Scope
+          extend Alchemystai::Internal::Type::Enum
+
+          INTERNAL = :internal
+          EXTERNAL = :external
+
+          # @!method self.values
+          #   @return [Array<Symbol>]
         end
 
         class Metadata < Alchemystai::Internal::Type::BaseModel
@@ -118,17 +129,6 @@ module Alchemystai
           #   @param group_name [Array<String>] Array of Group Name to which the file belongs to
           #
           #   @param last_modified [String] Last modified timestamp
-        end
-
-        # Scope of the context
-        module Scope
-          extend Alchemystai::Internal::Type::Enum
-
-          INTERNAL = :internal
-          EXTERNAL = :external
-
-          # @!method self.values
-          #   @return [Array<Symbol>]
         end
       end
     end

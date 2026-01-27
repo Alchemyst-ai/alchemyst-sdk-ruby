@@ -33,7 +33,12 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
     end
 
     assert_requested(:any, /./, times: 3)
@@ -46,7 +51,12 @@ class AlchemystaiTest < Minitest::Test
       Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
     end
 
     assert_requested(:any, /./, times: 4)
@@ -58,7 +68,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add(request_options: {max_retries: 3})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {max_retries: 3}
+      )
     end
 
     assert_requested(:any, /./, times: 4)
@@ -71,7 +87,13 @@ class AlchemystaiTest < Minitest::Test
       Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add(request_options: {max_retries: 4})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {max_retries: 4}
+      )
     end
 
     assert_requested(:any, /./, times: 5)
@@ -88,7 +110,12 @@ class AlchemystaiTest < Minitest::Test
       Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -107,7 +134,12 @@ class AlchemystaiTest < Minitest::Test
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -126,7 +158,12 @@ class AlchemystaiTest < Minitest::Test
       Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
     end
 
     assert_requested(:any, /./, times: 2)
@@ -139,7 +176,12 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox"
+      )
     end
 
     3.times do
@@ -153,7 +195,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {"x-stainless-retry-count" => nil}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
+      )
     end
 
     assert_requested(:any, /./, times: 3) do
@@ -167,7 +215,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::InternalServerError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {"x-stainless-retry-count" => "42"}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
+      )
     end
 
     assert_requested(:any, /./, headers: {"x-stainless-retry-count" => "42"}, times: 3)
@@ -187,7 +241,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::APIConnectionError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {}}
+      )
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -216,7 +276,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::APIConnectionError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {}}
+      )
     end
 
     assert_requested(:get, "http://localhost/redirected", times: Alchemystai::Client::MAX_REDIRECTS) do
@@ -240,7 +306,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::APIConnectionError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
+      )
     end
 
     recorded, = WebMock::RequestRegistry.instance.requested_signatures.hash.first
@@ -267,7 +339,13 @@ class AlchemystaiTest < Minitest::Test
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Alchemystai::Errors::APIConnectionError) do
-      alchemyst_ai.v1.context.add(request_options: {extra_headers: {"authorization" => "Bearer xyz"}})
+      alchemyst_ai.v1.context.add(
+        context_type: :resource,
+        documents: [{}],
+        scope: :internal,
+        source: "support-inbox",
+        request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
+      )
     end
 
     assert_requested(:any, "https://example.com/redirected", times: Alchemystai::Client::MAX_REDIRECTS) do
@@ -281,7 +359,12 @@ class AlchemystaiTest < Minitest::Test
 
     alchemyst_ai = Alchemystai::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    alchemyst_ai.v1.context.add
+    alchemyst_ai.v1.context.add(
+      context_type: :resource,
+      documents: [{}],
+      scope: :internal,
+      source: "support-inbox"
+    )
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")

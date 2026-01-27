@@ -4,10 +4,15 @@ module Alchemystai
       class Context
         class View
           def retrieve: (
+            ?file_name: String,
+            ?magic_key: String,
             ?request_options: Alchemystai::request_opts
           ) -> Alchemystai::Models::V1::Context::ViewRetrieveResponse
 
-          def docs: (?request_options: Alchemystai::request_opts) -> top
+          def docs: (
+            ?magic_key: String,
+            ?request_options: Alchemystai::request_opts
+          ) -> Alchemystai::Models::V1::Context::ViewDocsResponse
 
           def initialize: (client: Alchemystai::Client) -> void
         end

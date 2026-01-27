@@ -17,15 +17,20 @@ module Alchemystai
             end
 
           # The ID of the memory to delete
-          sig { returns(T.nilable(String)) }
-          attr_reader :memory_id
+          sig { returns(String) }
+          attr_accessor :memory_id
 
-          sig { params(memory_id: String).void }
-          attr_writer :memory_id
-
-          # Optional organization ID
+          # Organization ID
           sig { returns(T.nilable(String)) }
           attr_accessor :organization_id
+
+          # Delete by document flag
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_accessor :by_doc
+
+          # Delete by ID flag
+          sig { returns(T.nilable(T::Boolean)) }
+          attr_accessor :by_id
 
           # Optional user ID
           sig { returns(T.nilable(String)) }
@@ -35,15 +40,21 @@ module Alchemystai
             params(
               memory_id: String,
               organization_id: T.nilable(String),
+              by_doc: T.nilable(T::Boolean),
+              by_id: T.nilable(T::Boolean),
               user_id: T.nilable(String),
               request_options: Alchemystai::RequestOptions::OrHash
             ).returns(T.attached_class)
           end
           def self.new(
             # The ID of the memory to delete
-            memory_id: nil,
-            # Optional organization ID
-            organization_id: nil,
+            memory_id:,
+            # Organization ID
+            organization_id:,
+            # Delete by document flag
+            by_doc: nil,
+            # Delete by ID flag
+            by_id: nil,
             # Optional user ID
             user_id: nil,
             request_options: {}
@@ -55,6 +66,8 @@ module Alchemystai
               {
                 memory_id: String,
                 organization_id: T.nilable(String),
+                by_doc: T.nilable(T::Boolean),
+                by_id: T.nilable(T::Boolean),
                 user_id: T.nilable(String),
                 request_options: Alchemystai::RequestOptions
               }

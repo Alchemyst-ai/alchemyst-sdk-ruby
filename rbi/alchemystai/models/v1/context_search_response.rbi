@@ -76,6 +76,7 @@ module Alchemystai
           sig { params(created_at: Time).void }
           attr_writer :created_at
 
+          # Only included when query parameter metadata=true
           sig { returns(T.nilable(T.anything)) }
           attr_reader :metadata
 
@@ -106,6 +107,7 @@ module Alchemystai
           def self.new(
             content: nil,
             created_at: nil,
+            # Only included when query parameter metadata=true
             metadata: nil,
             score: nil,
             updated_at: nil

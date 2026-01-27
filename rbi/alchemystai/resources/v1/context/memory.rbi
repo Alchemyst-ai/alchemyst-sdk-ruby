@@ -12,55 +12,67 @@ module Alchemystai
                 T::Array[
                   Alchemystai::V1::Context::MemoryUpdateParams::Content::OrHash
                 ],
-              memory_id: String,
+              session_id: String,
               request_options: Alchemystai::RequestOptions::OrHash
-            ).void
+            ).returns(Alchemystai::Models::V1::Context::MemoryUpdateResponse)
           end
           def update(
             # Array of updated content objects
-            contents: nil,
+            contents:,
             # The ID of the memory to update
-            memory_id: nil,
+            session_id:,
             request_options: {}
           )
           end
 
-          # Deletes memory context data based on provided parameters
+          # Deletes memory context data based on provided parameters.
           sig do
             params(
               memory_id: String,
               organization_id: T.nilable(String),
+              by_doc: T.nilable(T::Boolean),
+              by_id: T.nilable(T::Boolean),
               user_id: T.nilable(String),
               request_options: Alchemystai::RequestOptions::OrHash
             ).void
           end
           def delete(
             # The ID of the memory to delete
-            memory_id: nil,
-            # Optional organization ID
-            organization_id: nil,
+            memory_id:,
+            # Organization ID
+            organization_id:,
+            # Delete by document flag
+            by_doc: nil,
+            # Delete by ID flag
+            by_id: nil,
             # Optional user ID
             user_id: nil,
             request_options: {}
           )
           end
 
-          # This endpoint adds memory context data, fetching chat history if needed.
+          # This endpoint adds memory (chat history) as context.
           sig do
             params(
               contents:
                 T::Array[
                   Alchemystai::V1::Context::MemoryAddParams::Content::OrHash
                 ],
-              memory_id: String,
+              session_id: String,
+              metadata:
+                Alchemystai::V1::Context::MemoryAddParams::Metadata::OrHash,
               request_options: Alchemystai::RequestOptions::OrHash
-            ).void
+            ).returns(Alchemystai::Models::V1::Context::MemoryAddResponse)
           end
           def add(
-            # Array of content objects with additional properties allowed
-            contents: nil,
-            # The ID of the memory
-            memory_id: nil,
+            # Array of content objects. Each object must contain at least the 'content' field.
+            # Additional properties are allowed.
+            contents:,
+            # The ID of the session
+            session_id:,
+            # Optional metadata for the memory context. Defaults to ["default"] if not
+            # provided.
+            metadata: nil,
             request_options: {}
           )
           end

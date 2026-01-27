@@ -13,26 +13,30 @@ module Alchemystai
         sig { returns(Alchemystai::Resources::V1::Context::Memory) }
         attr_reader :memory
 
-        # Deletes context data based on provided parameters
+        sig { returns(Alchemystai::Resources::V1::Context::AddAsync) }
+        attr_reader :add_async
+
+        # This endpoint deletes context data based on the provided parameters. It returns
+        # a success or error response depending on the result from the context processor.
         sig do
           params(
+            organization_id: String,
+            source: String,
             by_doc: T.nilable(T::Boolean),
             by_id: T.nilable(T::Boolean),
-            organization_id: T.nilable(String),
-            source: String,
             user_id: T.nilable(String),
             request_options: Alchemystai::RequestOptions::OrHash
           ).returns(T.anything)
         end
         def delete(
+          # Organization ID
+          organization_id:,
+          # Source identifier for the context
+          source:,
           # Flag to delete by document
           by_doc: nil,
           # Flag to delete by ID
           by_id: nil,
-          # Optional organization ID
-          organization_id: nil,
-          # Source identifier for the context
-          source: nil,
           # Optional user ID
           user_id: nil,
           request_options: {}
@@ -48,23 +52,23 @@ module Alchemystai
               Alchemystai::V1::ContextAddParams::ContextType::OrSymbol,
             documents:
               T::Array[Alchemystai::V1::ContextAddParams::Document::OrHash],
-            metadata: Alchemystai::V1::ContextAddParams::Metadata::OrHash,
             scope: Alchemystai::V1::ContextAddParams::Scope::OrSymbol,
             source: String,
+            metadata: Alchemystai::V1::ContextAddParams::Metadata::OrHash,
             request_options: Alchemystai::RequestOptions::OrHash
-          ).returns(T.anything)
+          ).returns(Alchemystai::Models::V1::ContextAddResponse)
         end
         def add(
           # Type of context being added
-          context_type: nil,
+          context_type:,
           # Array of documents with content and additional metadata
-          documents: nil,
+          documents:,
+          # Scope of the context
+          scope:,
+          # The source of the context data
+          source:,
           # Additional metadata for the context
           metadata: nil,
-          # Scope of the context
-          scope: nil,
-          # The source of the context data
-          source: nil,
           request_options: {}
         )
         end
@@ -76,24 +80,39 @@ module Alchemystai
             minimum_similarity_threshold: Float,
             query: String,
             similarity_threshold: Float,
-            metadata: T.anything,
+            metadata: Alchemystai::V1::ContextSearchParams::Metadata::OrSymbol,
+            mode: Alchemystai::V1::ContextSearchParams::Mode::OrSymbol,
+            body_metadata: T.anything,
             scope: Alchemystai::V1::ContextSearchParams::Scope::OrSymbol,
             user_id: String,
             request_options: Alchemystai::RequestOptions::OrHash
           ).returns(Alchemystai::Models::V1::ContextSearchResponse)
         end
         def search(
-          # Minimum similarity threshold
+          # Body param: Minimum similarity threshold
           minimum_similarity_threshold:,
-          # The search query used to search for context data
+          # Body param: The search query used to search for context data
           query:,
-          # Maximum similarity threshold (must be >= minimum_similarity_threshold)
+          # Body param: Maximum similarity threshold (must be >=
+          # minimum_similarity_threshold)
           similarity_threshold:,
-          # Additional metadata for the search
+          # Query param: Controls whether metadata is included in the response:
+          #
+          # - metadata=true → metadata will be included in each context item in the
+          #   response.
+          # - metadata=false (or omitted) → metadata will be excluded from the response for
+          #   better performance.
           metadata: nil,
-          # Search scope
+          # Query param: Controls the search mode:
+          #
+          # - mode=fast → prioritizes speed over completeness.
+          # - mode=standard → performs a comprehensive search (default if omitted).
+          mode: nil,
+          # Body param: Additional metadata for the search
+          body_metadata: nil,
+          # Body param: Search scope
           scope: nil,
-          # The ID of the user making the request
+          # Body param: The ID of the user making the request
           user_id: nil,
           request_options: {}
         )

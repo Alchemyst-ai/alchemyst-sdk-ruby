@@ -1,0 +1,84 @@
+module Alchemystai
+  module Models
+    module V1
+      module Context
+        module AddAsync
+          type status_list_response =
+            {
+              jobs: ::Array[Alchemystai::Models::V1::Context::AddAsync::StatusListResponse::Job],
+              success: bool
+            }
+
+          class StatusListResponse < Alchemystai::Internal::Type::BaseModel
+            attr_accessor jobs: ::Array[Alchemystai::Models::V1::Context::AddAsync::StatusListResponse::Job]
+
+            attr_accessor success: bool
+
+            def initialize: (
+              jobs: ::Array[Alchemystai::Models::V1::Context::AddAsync::StatusListResponse::Job],
+              success: bool
+            ) -> void
+
+            def to_hash: -> {
+              jobs: ::Array[Alchemystai::Models::V1::Context::AddAsync::StatusListResponse::Job],
+              success: bool
+            }
+
+            type job =
+              {
+                attempts_made: Float,
+                data: top,
+                job_id: String,
+                status: String,
+                failed_reason: String,
+                finished_on: Float,
+                processed_on: Float
+              }
+
+            class Job < Alchemystai::Internal::Type::BaseModel
+              attr_accessor attempts_made: Float
+
+              attr_accessor data: top
+
+              attr_accessor job_id: String
+
+              attr_accessor status: String
+
+              attr_reader failed_reason: String?
+
+              def failed_reason=: (String) -> String
+
+              attr_reader finished_on: Float?
+
+              def finished_on=: (Float) -> Float
+
+              attr_reader processed_on: Float?
+
+              def processed_on=: (Float) -> Float
+
+              def initialize: (
+                attempts_made: Float,
+                data: top,
+                job_id: String,
+                status: String,
+                ?failed_reason: String,
+                ?finished_on: Float,
+                ?processed_on: Float
+              ) -> void
+
+              def to_hash: -> {
+                attempts_made: Float,
+                data: top,
+                job_id: String,
+                status: String,
+                failed_reason: String,
+                finished_on: Float,
+                processed_on: Float
+              }
+            end
+          end
+        end
+      end
+    end
+  end
+end
